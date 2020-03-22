@@ -60,4 +60,16 @@ class User extends Authenticatable
             User::class, 'followers', 'following_id', 'user_id'
         );
     }
+
+    /**
+     * Qweets from other users that are followed.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function qweetsFromFollowing()
+    {
+        return $this->hasManyThrough(
+            Qweet::class, Follower::class, 'user_id', 'user_id', 'id', 'following_id'
+        );
+    }
 }
