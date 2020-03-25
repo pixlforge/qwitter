@@ -23,8 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->user()->qweetsFromFollowing);
-        
         return view('home');
     }
 }
