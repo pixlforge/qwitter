@@ -1,9 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
-    <h1>
-      Home
-    </h1>
-  </div>
+  <section>
+
+    {{-- SR title --}}
+    <x-sr-title>
+      Main content
+    </x-sr-title>
+
+    <div class="flex">
+
+      <aside class="w-1/4">
+        Aside
+      </aside>
+
+      <main class="w-3/4 border-r border-l border-gray-800">
+        Main
+      </main>
+
+    </div>
+  </section>
 @endsection
