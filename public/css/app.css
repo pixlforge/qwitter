@@ -13955,6 +13955,10 @@ a {
   color: #4299e1;
 }
 
+input {
+  color: #2d3748;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

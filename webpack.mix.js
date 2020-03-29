@@ -9,3 +9,10 @@ mix.sass('resources/sass/app.scss', 'public/css').options({
       tailwindcss('./tailwind.config.js')
    ]
 });
+
+mix.disableSuccessNotifications()
+   .browserSync({
+      ui: false,
+      notify: false,
+      proxy: 'qwitter.test'
+});

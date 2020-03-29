@@ -38,6 +38,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the Gravatar avatar.
+     *
+     * @return string
+     */
+    public function getAvatarUrl()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->email) . '?d=mp';
+    }
+
+    /**
      * Following relastionship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
