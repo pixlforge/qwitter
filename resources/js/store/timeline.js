@@ -16,9 +16,12 @@ export default {
     }
   },
   actions: {
-    async getQweets ({ commit }) {
-      const res = await axios.get('/api/timeline')
+    async getQweets ({ commit }, url) {
+      const res = await axios.get(url)
+
       commit('SET_QWEETS', res.data.data)
+
+      return res
     }
   }
 }

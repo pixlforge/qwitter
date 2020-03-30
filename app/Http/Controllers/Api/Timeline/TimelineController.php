@@ -15,7 +15,8 @@ class TimelineController extends Controller
         return QweetCollection::make(
             $request->user()
                 ->qweetsFromFollowing()
-                ->paginate(5)
+                ->latest()
+                ->paginate(7)
         );
     }
 }
