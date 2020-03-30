@@ -11,22 +11,21 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      qweets: []
-    }
+  computed: {
+    ...mapGetters({
+      qweets: 'timeline/qweets'
+    })
   },
   mounted () {
     this.getQweets()
   },
   methods: {
-    async getQweets () {
-      const res = await axios.get('/api/timeline')
-      this.qweets = res.data.data
-    }
+    ...mapActions({
+      getQweets: 'timeline/getQweets'
+    })
   }
 }
 </script>
