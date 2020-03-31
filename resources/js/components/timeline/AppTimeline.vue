@@ -1,6 +1,11 @@
 <template>
   <div>
 
+    <!-- Compose a qweet -->
+    <div class="w-full border-b-8 border-gray-800 p-4">
+      <app-qweet-compose/>
+    </div>
+
     <app-qweet
       v-for="qweet in qweets"
       :key="qweet.id"

@@ -8,12 +8,18 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   
   <title>{{ config('app.name', 'Laravel') }}</title>
+
+  {{-- Styles --}}
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   
   {{-- Scripts --}}
   <script src="{{ mix('js/app.js') }}" defer></script>
-  
-  {{-- Styles --}}
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <script>
+    window.User = {
+      id: {{ optional(auth()->user())->id }},
+      avatar_url: "{{ optional(auth()->user())->getAvatarUrl() }}"
+    }
+  </script>
 </head>
 <body>
   <div id="app">
