@@ -1,6 +1,6 @@
 <template>
   <form
-    @submit.prevent
+    @submit.prevent="submit"
     class="w-full flex"
   >
 
@@ -14,6 +14,7 @@
 
     <div class="flex-grow">
       <textarea
+        v-model="form.body"
         id=""
         placeholder="What's happening?"
         class="w-full bg-gray-900 outline-none focus:shadow-outline text-lg resize-none mb-2"
@@ -38,3 +39,27 @@
 
   </form>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data () {
+    return {
+      form: {
+        body: ''
+      }
+    }
+  },
+  methods: {
+    async submit () {
+      try {
+        await axios.post('/api/qweets', this.form)
+        this.form.body = ''
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  }
+}
+</script>

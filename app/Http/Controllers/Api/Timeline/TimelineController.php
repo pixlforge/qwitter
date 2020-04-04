@@ -8,8 +8,20 @@ use App\Http\Resources\QweetCollection;
 
 class TimelineController extends Controller
 {
-    // auth
+    /**
+     * TimelineController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
 
+    /**
+     * Get the latest qweets from following users.
+     *
+     * @param Request $request
+     * @return QweetCollection
+     */
     public function index(Request $request)
     {
         return QweetCollection::make(

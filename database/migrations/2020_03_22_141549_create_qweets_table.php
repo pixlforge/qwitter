@@ -16,7 +16,7 @@ class CreateQweetsTable extends Migration
         Schema::create('qweets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->text('body', 250);
+            $table->text('body');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

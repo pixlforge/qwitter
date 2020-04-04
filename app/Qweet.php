@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Qweet extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'body',
+    ];
+    
+    /**
      * User relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

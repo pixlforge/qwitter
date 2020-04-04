@@ -72,6 +72,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Qweets relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function qweets()
+    {
+        return $this->hasMany(Qweet::class);
+    }
+
+    /**
      * Qweets from other users that are followed.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
