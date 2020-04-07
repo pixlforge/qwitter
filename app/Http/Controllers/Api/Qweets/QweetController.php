@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
+use App\Events\Qweets\QweetWasCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Qweets\QweetStoreRequest;
 
@@ -17,6 +18,8 @@ class QweetController extends Controller
 
     public function store(QweetStoreRequest $request)
     {
-        $request->user()->qweets()->create($request->only('body'));
+        $qweet = $request->user()->qweets()->create($request->only('body'));
+
+        QweetWasCreated::broadcast($qweet);
     }
 }

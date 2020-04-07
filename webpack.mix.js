@@ -10,9 +10,11 @@ mix.sass('resources/sass/app.scss', 'public/css').options({
    ]
 });
 
-mix.disableSuccessNotifications()
-   .browserSync({
-      ui: false,
-      notify: false,
-      proxy: 'qwitter.test'
-});
+mix.disableSuccessNotifications();
+
+// mix.disableSuccessNotifications()
+//    .browserSync({
+//       ui: false,
+//       notify: false,
+//       proxy: 'qwitter.test'
+// });

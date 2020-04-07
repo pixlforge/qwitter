@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block hover:bg-gray-800 border-b border-gray-800 cursor-pointer p-4">
+  <div class="hover:bg-gray-800 border-b border-gray-800 cursor-pointer p-4">
     
     <div class="flex">
 

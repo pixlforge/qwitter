@@ -16,7 +16,7 @@
   <script src="{{ mix('js/app.js') }}" defer></script>
   <script>
     window.User = {
-      id: {{ optional(auth()->user())->id }},
+      id: "{{ optional(auth()->user())->id }}",
       avatar_url: "{{ optional(auth()->user())->getAvatarUrl() }}"
     }
   </script>

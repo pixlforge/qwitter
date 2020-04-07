@@ -17,7 +17,8 @@ class QweetResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'user' => UserResource::make($this->user)
+            'user' => UserResource::make($this->user),
+            'created_at' => $this->created_at->timestamp
         ];
     }
 }

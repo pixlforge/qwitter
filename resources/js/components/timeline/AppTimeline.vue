@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -45,10 +45,18 @@ export default {
   },
   mounted () {
     this.loadQweets()
+
+    Echo.private(`timeline.${this.$user.id}`)
+      .listen('.QweetWasCreated', (event) => {
+        this.setQweets([event])
+      })
   },
   methods: {
     ...mapActions({
       getQweets: 'timeline/getQweets'
+    }),
+    ...mapMutations({
+      setQweets: 'timeline/SET_QWEETS'
     }),
     loadQweets () {
       this.getQweets(this.urlWithPage).then((res) => {

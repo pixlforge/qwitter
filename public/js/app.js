@@ -2152,16 +2152,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   mounted: function mounted() {
+    var _this = this;
+
     this.loadQweets();
+    Echo["private"]("timeline.".concat(this.$user.id)).listen('.QweetWasCreated', function (event) {
+      _this.setQweets([event]);
+    });
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     getQweets: 'timeline/getQweets'
+  }), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])({
+    setQweets: 'timeline/SET_QWEETS'
   }), {
     loadQweets: function loadQweets() {
-      var _this = this;
+      var _this2 = this;
 
       this.getQweets(this.urlWithPage).then(function (res) {
-        _this.lastPage = res.data.meta.last_page;
+        _this2.lastPage = res.data.meta.last_page;
       });
     },
     handleScrolledToBottomOfTimeline: function handleScrolledToBottomOfTimeline(isVisible) {
@@ -47869,7 +47876,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "inline-block hover:bg-gray-800 border-b border-gray-800 cursor-pointer p-4"
+        "hover:bg-gray-800 border-b border-gray-800 cursor-pointer p-4"
     },
     [
       _c("div", { staticClass: "flex" }, [
@@ -62000,7 +62007,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   getters: {
     qweets: function qweets(state) {
-      return state.qweets;
+      return state.qweets.sort(function (a, b) {
+        return b.created_at - a.created_at;
+      });
     }
   },
   mutations: {

@@ -8,6 +8,7 @@ export default {
   getters: {
     qweets (state) {
       return state.qweets
+        .sort((a, b) => b.created_at - a.created_at)
     }
   },
   mutations: {
