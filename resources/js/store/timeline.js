@@ -13,7 +13,11 @@ export default {
   },
   mutations: {
     SET_QWEETS (state, qweets) {
-      state.qweets.push(...qweets)
+      state.qweets.push(
+        ...qweets.filter((qweet) => {
+          return !state.qweets.map((q) => q.id).includes(qweet.id)
+        })
+      )
     }
   },
   actions: {

@@ -62016,7 +62016,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     SET_QWEETS: function SET_QWEETS(state, qweets) {
       var _state$qweets;
 
-      (_state$qweets = state.qweets).push.apply(_state$qweets, _toConsumableArray(qweets));
+      (_state$qweets = state.qweets).push.apply(_state$qweets, _toConsumableArray(qweets.filter(function (qweet) {
+        return !state.qweets.map(function (q) {
+          return q.id;
+        }).includes(qweet.id);
+      })));
     }
   },
   actions: {
