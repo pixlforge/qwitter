@@ -12,7 +12,7 @@ class Qweet extends Model
      * @var array
      */
     protected $fillable = [
-        'body',
+        'body', 'type',
     ];
     
     /**
