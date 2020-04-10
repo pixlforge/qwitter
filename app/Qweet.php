@@ -24,4 +24,14 @@ class Qweet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Original qweet relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function originalQweet()
+    {
+        return $this->hasOne(Qweet::class, 'id', 'original_qweet_id');
+    }
 }
