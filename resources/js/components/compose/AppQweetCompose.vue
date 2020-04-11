@@ -13,12 +13,9 @@
     </div>
 
     <div class="flex-grow">
-      <textarea
-        v-model="form.body"
-        id=""
-        placeholder="What's happening?"
-        class="w-full bg-gray-900 outline-none focus:shadow-outline text-lg resize-none mb-2"
-      ></textarea>
+      
+      <!-- Compose -->
+      <app-qweet-compose-textarea v-model="form.body"/>
 
       <div class="flex justify-between">
         <div>
