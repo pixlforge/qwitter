@@ -23,6 +23,9 @@
         class="border border-gray-700 rounded-lg mt-4"
       />
 
+      <!-- Actions -->
+      <app-qweet-actions-group/>
+
     </div>
   </div>
 </template>
