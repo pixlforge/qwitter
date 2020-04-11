@@ -17,6 +17,12 @@
       <!-- Body -->
       <p class="text-gray-300 whitespace-pre-wrap">{{ qweet.body }}</p>
 
+      <!-- Original qweet -->
+      <app-qweet
+        :qweet="qweet.original_qweet"
+        class="border border-gray-700 rounded-lg mt-4"
+      />
+
     </div>
   </div>
 </template>
