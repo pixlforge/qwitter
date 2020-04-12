@@ -18,7 +18,7 @@
       <p class="text-gray-300 whitespace-pre-wrap">{{ qweet.body }}</p>
 
       <!-- Actions -->
-      <app-qweet-actions-group/>
+      <app-qweet-actions-group :qweet="qweet"/>
 
     </div>
   </div>

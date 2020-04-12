@@ -14,4 +14,14 @@ class Like extends Model
     protected $fillable = [
         'user_id', 'qweet_id',
     ];
+
+    /**
+     * Qweet relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function qweet()
+    {
+        return $this->belongsTo(Qweet::class);
+    }
 }

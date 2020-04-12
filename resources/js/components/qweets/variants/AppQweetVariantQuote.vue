@@ -24,7 +24,7 @@
       />
 
       <!-- Actions -->
-      <app-qweet-actions-group/>
+      <app-qweet-actions-group :qweet="qweet"/>
 
     </div>
   </div>
