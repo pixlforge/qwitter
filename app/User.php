@@ -48,6 +48,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Checks whether or not the user has already
+     * liked a particular qweet.
+     *
+     * @param Qweet $qweet
+     * @return boolean
+     */
+    public function hasLiked(Qweet $qweet)
+    {
+        return $this->likes->contains('qweet_id', $qweet->id);
+    }
+
+    /**
      * Following relastionship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

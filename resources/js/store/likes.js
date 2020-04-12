@@ -15,5 +15,12 @@ export default {
       state.likes.push(...likes)
     }
   },
-  actions: {}
+  actions: {
+    async likeQweet (_, qweet) {
+      await axios.post(`/api/qweets/${qweet.id}/likes`)
+    },
+    async unlikeQweet (_, qweet) {
+      await axios.delete(`/api/qweets/${qweet.id}/likes`)
+    }
+  }
 }

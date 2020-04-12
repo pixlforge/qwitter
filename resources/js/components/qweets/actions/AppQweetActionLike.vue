@@ -1,9 +1,10 @@
 <template>
   <a
+    @click.prevent="likeOrUnlike"
     href="#"
     :class="{
       'text-red-600': liked,
-      'text-gray-600': !liked
+      'text-gray-600 hover:text-gray-200 transition-colors duration-100 ease-out': !liked
     }"
     class="flex items-center text-sm"
   >
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -38,6 +39,20 @@ export default {
     }),
     liked () {
       return this.likes.includes(this.qweet.id)
+    }
+  },
+  methods: {
+    ...mapActions({
+      likeQweet: 'likes/likeQweet',
+      unlikeQweet: 'likes/unlikeQweet'
+    }),
+    likeOrUnlike () {
+      if (this.liked) {
+        this.unlikeQweet(this.qweet)
+        return
+      }
+
+      this.likeQweet(this.qweet)
     }
   }
 }
