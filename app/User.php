@@ -92,4 +92,14 @@ class User extends Authenticatable
             Qweet::class, Follower::class, 'user_id', 'user_id', 'id', 'following_id'
         );
     }
+
+    /**
+     * Likes relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

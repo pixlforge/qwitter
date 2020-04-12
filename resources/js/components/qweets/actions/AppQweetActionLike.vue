@@ -1,7 +1,11 @@
 <template>
   <a
     href="#"
-    class="flex items-center text-sm text-gray-600"
+    :class="{
+      'text-red-600': liked,
+      'text-gray-600': !liked
+    }"
+    class="flex items-center text-sm"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,11 +23,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     qweet: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    ...mapGetters({
+      likes: 'likes/likes'
+    }),
+    liked () {
+      return this.likes.includes(this.qweet.id)
     }
   }
 }

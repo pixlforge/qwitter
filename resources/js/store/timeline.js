@@ -26,6 +26,8 @@ export default {
 
       commit('SET_QWEETS', res.data.data)
 
+      commit('likes/SET_LIKES', res.data.meta.likes, { root: true })
+
       return res
     }
   }
