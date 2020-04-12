@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
+use App\Events\Qweets\QweetLikesUpdated;
 use App\Qweet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,6 +23,8 @@ class QweetLikeController extends Controller
         $request->user()->likes()->create([
             'qweet_id' => $qweet->id
         ]);
+
+        QweetLikesUpdated::broadcast($request->user(), $qweet);
     }
 
     /**

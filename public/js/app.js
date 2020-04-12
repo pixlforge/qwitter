@@ -62254,6 +62254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_observe_visibility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-observe-visibility */ "./node_modules/vue-observe-visibility/dist/vue-observe-visibility.esm.js");
 /* harmony import */ var _store_timeline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/timeline */ "./resources/js/store/timeline.js");
 /* harmony import */ var _store_likes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/likes */ "./resources/js/store/likes.js");
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -62283,6 +62284,7 @@ files.keys().map(function (key) {
 
 
 
+
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   modules: {
     timeline: _store_timeline__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -62298,6 +62300,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
 var app = new Vue({
   el: '#app',
   store: store
+});
+window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
+  store.commit('timeline/SET_LIKES', event);
 });
 
 /***/ }),
@@ -63298,17 +63303,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return q.id;
         }).includes(qweet.id);
       })));
+    },
+    SET_LIKES: function SET_LIKES(state, _ref) {
+      var id = _ref.id,
+          count = _ref.count;
+      console.log(id, count);
+      state.qweets = state.qweets.map(function (qweet) {
+        if (qweet.id === id) {
+          qweet.likes_count = count;
+        }
+
+        return qweet;
+      });
     }
   },
   actions: {
-    getQweets: function getQweets(_ref, url) {
+    getQweets: function getQweets(_ref2, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var commit, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref.commit;
+                commit = _ref2.commit;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
 
