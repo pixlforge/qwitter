@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
-use App\Events\Qweets\QweetLikesUpdated;
 use App\Qweet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Events\Qweets\QweetLikesUpdated;
 
 class QweetLikeController extends Controller
 {
@@ -40,5 +40,7 @@ class QweetLikeController extends Controller
             ->where('qweet_id', $qweet->id)
             ->first()
             ->delete();
+
+        QweetLikesUpdated::broadcast($request->user(), $qweet);
     }
 }

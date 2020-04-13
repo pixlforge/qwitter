@@ -20,7 +20,6 @@ export default {
       )
     },
     SET_LIKES (state, { id, count }) {
-      console.log(id, count)
       state.qweets = state.qweets.map((qweet) => {
         if (qweet.id === id) {
           qweet.likes_count = count

@@ -53,5 +53,9 @@ const app = new Vue({
 
 window.Echo.channel('qweets')
     .listen('.QweetLikesUpdated', (event) => {
+        if (event.user_id == User.id) {
+            store.dispatch('likes/syncLike', event.id)
+        }
+
         store.commit('timeline/SET_LIKES', event)
     });
