@@ -2272,6 +2272,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2307,6 +2314,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     qweet: {
@@ -2314,6 +2326,13 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    reqweets: 'reqweets/reqweets'
+  }), {
+    reqweeted: function reqweeted() {
+      return this.reqweets.includes(this.qweet.id);
+    }
+  }),
   methods: {
     log: function log() {
       console.log('Yo');
@@ -48564,10 +48583,10 @@ var render = function() {
   return _c(
     "a",
     {
-      staticClass: "flex items-center text-sm",
+      staticClass: "flex items-center transition-colors duration-100 ease-out",
       class: {
         "text-red-600": _vm.liked,
-        "text-gray-600 hover:text-gray-200 transition-colors duration-100 ease-out": !_vm.liked
+        "text-gray-600 hover:text-gray-200": !_vm.liked
       },
       attrs: { href: "#" },
       on: {
@@ -48581,7 +48600,7 @@ var render = function() {
       _c(
         "svg",
         {
-          staticClass: "w-4 fill-current mr-2",
+          staticClass: "w-5 fill-current mr-1",
           attrs: {
             xmlns: "http://www.w3.org/2000/svg",
             viewBox: "0 0 24 24",
@@ -48628,14 +48647,15 @@ var render = function() {
   return _c(
     "a",
     {
-      staticClass: "flex items-center text-sm text-gray-600",
+      staticClass:
+        "flex items-center text-gray-600 hover:text-gray-200 transition-colors duration-100 ease-out",
       attrs: { href: "#" }
     },
     [
       _c(
         "svg",
         {
-          staticClass: "w-4 fill-current mr-2",
+          staticClass: "w-5 fill-current mr-1",
           attrs: {
             xmlns: "http://www.w3.org/2000/svg",
             viewBox: "0 0 24 24",
@@ -48686,14 +48706,19 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "flex items-center text-sm text-gray-600",
+            staticClass:
+              "flex items-center transition-colors duration-100 ease-out",
+            class: {
+              "text-green-600": _vm.reqweeted,
+              "text-gray-600 hover:text-gray-200": !_vm.reqweeted
+            },
             attrs: { href: "#" }
           },
           [
             _c(
               "svg",
               {
-                staticClass: "w-4 fill-current mr-2",
+                staticClass: "w-5 fill-current mr-1",
                 attrs: {
                   xmlns: "http://www.w3.org/2000/svg",
                   viewBox: "0 0 24 24",
@@ -62623,7 +62648,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_observe_visibility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-observe-visibility */ "./node_modules/vue-observe-visibility/dist/vue-observe-visibility.esm.js");
 /* harmony import */ var _store_timeline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/timeline */ "./resources/js/store/timeline.js");
 /* harmony import */ var _store_likes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/likes */ "./resources/js/store/likes.js");
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var _store_reqweets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/reqweets */ "./resources/js/store/reqweets.js");
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -62654,10 +62680,12 @@ files.keys().map(function (key) {
 
 
 
+
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   modules: {
     timeline: _store_timeline__WEBPACK_IMPORTED_MODULE_2__["default"],
-    likes: _store_likes__WEBPACK_IMPORTED_MODULE_3__["default"]
+    likes: _store_likes__WEBPACK_IMPORTED_MODULE_3__["default"],
+    reqweets: _store_reqweets__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /**
@@ -63797,6 +63825,74 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
+/***/ "./resources/js/store/reqweets.js":
+/*!****************************************!*\
+  !*** ./resources/js/store/reqweets.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    reqweets: []
+  },
+  getters: {
+    reqweets: function reqweets(state) {
+      return state.reqweets;
+    }
+  },
+  mutations: {
+    SET_REQWEETS: function SET_REQWEETS(state, reqweets) {
+      var _state$reqweets;
+
+      (_state$reqweets = state.reqweets).push.apply(_state$reqweets, _toConsumableArray(reqweets));
+    } // ADD_REQWEET (state, id) {
+    //   state.reqweets.push(id)
+    // },
+    // REMOVE_REQWEET (state, id) {
+    //   state.reqweets = without(state.reqweets, id)
+    // }
+
+  },
+  actions: {// async reqweetQweet (_, qweet) {
+    //   await axios.post(`/api/qweets/${qweet.id}/reqweets`)
+    // },
+    // async unreqweetQweet (_, qweet) {
+    //   await axios.delete(`/api/qweets/${qweet.id}/reqweets`)
+    // },
+    // syncReqweet ({ state, commit }, id) {
+    //   if (state.reqweets.includes(id)) {
+    //     commit('REMOVE_REQWEET', id)
+    //     return
+    //   }
+    //   commit('ADD_REQWEET', id)
+    // }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/timeline.js":
 /*!****************************************!*\
   !*** ./resources/js/store/timeline.js ***!
@@ -63888,9 +63984,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 commit('likes/SET_LIKES', res.data.meta.likes, {
                   root: true
                 });
+                commit('reqweets/SET_REQWEETS', res.data.meta.reqweets, {
+                  root: true
+                });
                 return _context.abrupt("return", res);
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }

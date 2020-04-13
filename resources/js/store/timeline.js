@@ -42,6 +42,8 @@ export default {
 
       commit('likes/SET_LIKES', res.data.meta.likes, { root: true })
 
+      commit('reqweets/SET_REQWEETS', res.data.meta.reqweets, { root: true })
+
       return res
     }
   }

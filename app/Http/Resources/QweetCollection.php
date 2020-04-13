@@ -36,7 +36,8 @@ class QweetCollection extends ResourceCollection
     {
         return [
             'meta' => [
-                'likes' => $this->likes($request)
+                'likes' => $this->likes($request),
+                'reqweets' => $this->reqweets($request),
             ]
         ];
     }
@@ -54,8 +55,34 @@ class QweetCollection extends ResourceCollection
         }
 
         return $user->likes()
-            ->whereIn('qweet_id', $this->collection->pluck('id'))
+            ->whereIn(
+                'qweet_id',
+                $this->collection->pluck('id')
+                    ->merge($this->collection->pluck('original_qweet_id'))
+            )
             ->pluck('qweet_id')
+            ->toArray();
+    }
+
+    /**
+     * Return all reqweeted qweets ids.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
+    protected function reqweets($request)
+    {
+        if (!$user = $request->user()) {
+            return [];
+        }
+
+        return $user->reqweets()
+            ->whereIn(
+                'original_qweet_id',
+                $this->collection->pluck('id')
+                    ->merge($this->collection->pluck('original_qweet_id'))
+            )
+            ->pluck('original_qweet_id')
             ->toArray();
     }
 }
