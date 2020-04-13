@@ -4,7 +4,7 @@
       <app-qweet-action-reply/>
     </li>
     <li class="mr-8">
-      <app-qweet-action-reqweet/>
+      <app-qweet-action-reqweet :qweet="qweet"/>
     </li>
     <li class="mr-8">
       <app-qweet-action-like :qweet="qweet"/>

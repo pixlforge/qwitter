@@ -44,4 +44,14 @@ class Qweet extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    /**
+     * Reqweets relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reqweets()
+    {
+        return $this->hasMany(Qweet::class, 'original_qweet_id');
+    }
 }

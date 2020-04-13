@@ -2308,6 +2308,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    qweet: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     log: function log() {
       console.log('Yo');
@@ -48705,7 +48711,11 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("span", [_vm._v("\n        0\n      ")])
+            _c("span", [
+              _vm._v(
+                "\n        " + _vm._s(_vm.qweet.reqweets_count) + "\n      "
+              )
+            ])
           ]
         )
       ]),
@@ -48764,7 +48774,12 @@ var render = function() {
   return _c("ul", { staticClass: "flex mt-4" }, [
     _c("li", { staticClass: "mr-8" }, [_c("app-qweet-action-reply")], 1),
     _vm._v(" "),
-    _c("li", { staticClass: "mr-8" }, [_c("app-qweet-action-reqweet")], 1),
+    _c(
+      "li",
+      { staticClass: "mr-8" },
+      [_c("app-qweet-action-reqweet", { attrs: { qweet: _vm.qweet } })],
+      1
+    ),
     _vm._v(" "),
     _c(
       "li",
