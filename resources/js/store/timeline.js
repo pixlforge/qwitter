@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { get } from 'lodash'
 
 export default {
   namespaced: true,
@@ -23,6 +24,10 @@ export default {
       state.qweets = state.qweets.map((qweet) => {
         if (qweet.id === id) {
           qweet.likes_count = count
+        }
+
+        if (get(qweet.original_qweet, 'id') === id) {
+          qweet.original_qweet.likes_count = count
         }
 
         return qweet
