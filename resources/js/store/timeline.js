@@ -33,6 +33,9 @@ export default {
         return qweet
       })
     },
+    REMOVE_QWEET (state, { id }) {
+      state.qweets = state.qweets.filter((qweet) => qweet.id !== id)
+    },
     SET_LIKES (state, { id, count }) {
       state.qweets = state.qweets.map((qweet) => {
         if (qweet.id === id) {

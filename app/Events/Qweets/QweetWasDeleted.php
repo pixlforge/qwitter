@@ -2,15 +2,14 @@
 
 namespace App\Events\Qweets;
 
-use App\Http\Resources\QweetResource;
 use App\Qweet;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class QweetWasCreated implements ShouldBroadcast
+class QweetWasDeleted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -38,7 +37,9 @@ class QweetWasCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return (QweetResource::make($this->qweet))->jsonSerialize();
+        return [
+            'id' => $this->qweet->id
+        ];
     }
 
     /**
@@ -48,7 +49,7 @@ class QweetWasCreated implements ShouldBroadcast
      */
     public function broadcastAs()
     {
-        return 'QweetWasCreated';
+        return 'QweetWasDeleted';
     }
 
     /**
@@ -58,8 +59,6 @@ class QweetWasCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return $this->qweet->user->followers->map(function ($user) {
-            return new PrivateChannel('timeline.' . $user->id);
-        })->toArray();
+        return new Channel('qweets');
     }
 }

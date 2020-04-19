@@ -62821,6 +62821,8 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
   }
 
   store.commit('timeline/SET_REQWEETS', event);
+}).listen('.QweetWasDeleted', function (event) {
+  store.commit('timeline/REMOVE_QWEET', event);
 });
 
 /***/ }),
@@ -64192,9 +64194,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return qweet;
       });
     },
-    SET_LIKES: function SET_LIKES(state, _ref2) {
-      var id = _ref2.id,
-          count = _ref2.count;
+    REMOVE_QWEET: function REMOVE_QWEET(state, _ref2) {
+      var id = _ref2.id;
+      state.qweets = state.qweets.filter(function (qweet) {
+        return qweet.id !== id;
+      });
+    },
+    SET_LIKES: function SET_LIKES(state, _ref3) {
+      var id = _ref3.id,
+          count = _ref3.count;
       state.qweets = state.qweets.map(function (qweet) {
         if (qweet.id === id) {
           qweet.likes_count = count;
@@ -64209,14 +64217,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   actions: {
-    getQweets: function getQweets(_ref3, url) {
+    getQweets: function getQweets(_ref4, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var commit, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref3.commit;
+                commit = _ref4.commit;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
 

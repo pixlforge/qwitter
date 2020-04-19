@@ -68,4 +68,7 @@ window.Echo.channel('qweets')
         }
 
         store.commit('timeline/SET_REQWEETS', event)
+    })
+    .listen('.QweetWasDeleted', (event) => {
+        store.commit('timeline/REMOVE_QWEET', event)
     });
