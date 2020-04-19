@@ -23,12 +23,12 @@ export default {
     // }
   },
   actions: {
-    // async reqweetQweet (_, qweet) {
-    //   await axios.post(`/api/qweets/${qweet.id}/reqweets`)
-    // },
-    // async unreqweetQweet (_, qweet) {
-    //   await axios.delete(`/api/qweets/${qweet.id}/reqweets`)
-    // },
+    async reqweetQweet (_, qweet) {
+      await axios.post(`/api/qweets/${qweet.id}/reqweets`)
+    },
+    async unreqweetQweet (_, qweet) {
+      await axios.delete(`/api/qweets/${qweet.id}/reqweets`)
+    },
     // syncReqweet ({ state, commit }, id) {
     //   if (state.reqweets.includes(id)) {
     //     commit('REMOVE_REQWEET', id)

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Qweets\QweetController;
 use App\Http\Controllers\Api\Qweets\QweetLikeController;
 use App\Http\Controllers\Api\Timeline\TimelineController;
+use App\Http\Controllers\Api\Qweets\QweetReqweetController;
 
 /**
  * Qweet
@@ -14,6 +15,12 @@ Route::post('/qweets', [QweetController::class, 'store'])->name('qweet.store');
  */
 Route::post('/qweets/{qweet}/likes', [QweetLikeController::class, 'store'])->name('qweet.like.store');
 Route::delete('/qweets/{qweet}/likes', [QweetLikeController::class, 'destroy'])->name('qweet.like.destroy');
+
+/**
+ * Reqweets
+ */
+Route::post('/qweets/{qweet}/reqweets', [QweetReqweetController::class, 'store'])->name('qweet.reqweet.store');
+Route::delete('/qweets/{qweet}/reqweets', [QweetReqweetController::class, 'destroy'])->name('qweet.reqweet.destroy');
 
 /**
  * Timeline

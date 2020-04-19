@@ -12,7 +12,7 @@ class Qweet extends Model
      * @var array
      */
     protected $fillable = [
-        'body', 'type',
+        'body', 'type', 'original_qweet_id',
     ];
     
     /**
@@ -53,5 +53,15 @@ class Qweet extends Model
     public function reqweets()
     {
         return $this->hasMany(Qweet::class, 'original_qweet_id');
+    }
+
+    /**
+     * Reqweeted qweet relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function reqweetedQweet()
+    {
+        return $this->hasOne(Qweet::class, 'original_qweet_id', 'id');
     }
 }

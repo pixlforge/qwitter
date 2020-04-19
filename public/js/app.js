@@ -2309,6 +2309,69 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    qweet: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    reqweets: 'reqweets/reqweets'
+  }), {
+    reqweeted: function reqweeted() {
+      return this.reqweets.includes(this.qweet.id);
+    }
+  }),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    reqweetQweet: 'reqweets/reqweetQweet',
+    unreqweetQweet: 'reqweets/unreqweetQweet'
+  }), {
+    reqweetOrUnreqweet: function reqweetOrUnreqweet() {
+      if (this.reqweeted) {
+        this.unreqweetQweet(this.qweet);
+        return;
+      }
+
+      this.reqweetQweet(this.qweet);
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2332,12 +2395,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     reqweeted: function reqweeted() {
       return this.reqweets.includes(this.qweet.id);
     }
-  }),
-  methods: {
-    log: function log() {
-      console.log('Yo');
-    }
-  }
+  })
 });
 
 /***/ }),
@@ -2351,6 +2409,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -48700,78 +48770,110 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "app-dropdown",
+    "div",
     [
-      _c("template", { slot: "trigger" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "flex items-center transition-colors duration-100 ease-out",
-            class: {
-              "text-green-600": _vm.reqweeted,
-              "text-gray-600 hover:text-gray-200": !_vm.reqweeted
-            },
-            attrs: { href: "#" }
-          },
-          [
-            _c(
-              "svg",
-              {
-                staticClass: "w-5 fill-current mr-1",
-                attrs: {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  viewBox: "0 0 24 24",
-                  width: "24",
-                  height: "24"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M5.41 16H18a2 2 0 0 0 2-2 1 1 0 0 1 2 0 4 4 0 0 1-4 4H5.41l2.3 2.3a1 1 0 0 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.4L5.4 16zM6 8a2 2 0 0 0-2 2 1 1 0 0 1-2 0 4 4 0 0 1 4-4h12.59l-2.3-2.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4L18.6 8H6z"
+      !_vm.reqweeted
+        ? _c(
+            "app-dropdown",
+            [
+              _c(
+                "template",
+                { slot: "trigger" },
+                [
+                  _c("app-qweet-action-reqweet-button", {
+                    attrs: { qweet: _vm.qweet }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "app-dropdown-item",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.reqweetOrUnreqweet($event)
+                    }
                   }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("span", [
-              _vm._v(
-                "\n        " + _vm._s(_vm.qweet.reqweets_count) + "\n      "
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "app-dropdown-item",
-        {
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.log($event)
+                },
+                [_vm._v("\n      Reqweet\n    ")]
+              ),
+              _vm._v(" "),
+              _c("app-dropdown-item", [
+                _vm._v("\n      Reqweet with comment\n    ")
+              ])
+            ],
+            2
+          )
+        : _c("app-qweet-action-reqweet-button", {
+            attrs: { qweet: _vm.qweet },
+            nativeOn: {
+              click: function($event) {
+                return _vm.reqweetOrUnreqweet($event)
+              }
             }
+          })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      staticClass: "flex items-center transition-colors duration-100 ease-out",
+      class: {
+        "text-green-600": _vm.reqweeted,
+        "text-gray-600 hover:text-gray-200": !_vm.reqweeted
+      },
+      attrs: { href: "#" }
+    },
+    [
+      _c(
+        "svg",
+        {
+          staticClass: "w-5 fill-current mr-1",
+          attrs: {
+            xmlns: "http://www.w3.org/2000/svg",
+            viewBox: "0 0 24 24",
+            width: "24",
+            height: "24"
           }
         },
-        [_vm._v("\n    Reqweet\n  ")]
+        [
+          _c("path", {
+            attrs: {
+              d:
+                "M5.41 16H18a2 2 0 0 0 2-2 1 1 0 0 1 2 0 4 4 0 0 1-4 4H5.41l2.3 2.3a1 1 0 0 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.4L5.4 16zM6 8a2 2 0 0 0-2 2 1 1 0 0 1-2 0 4 4 0 0 1 4-4h12.59l-2.3-2.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4L18.6 8H6z"
+            }
+          })
+        ]
       ),
       _vm._v(" "),
-      _c(
-        "app-dropdown-item",
-        {
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.log($event)
-            }
-          }
-        },
-        [_vm._v("\n    Reqweet with comment\n  ")]
-      )
-    ],
-    2
+      _c("span", [_vm._v("\n    " + _vm._s(_vm.qweet.reqweets_count) + "\n  ")])
+    ]
   )
 }
 var staticRenderFns = []
@@ -48797,19 +48899,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("ul", { staticClass: "flex mt-4" }, [
-    _c("li", { staticClass: "mr-8" }, [_c("app-qweet-action-reply")], 1),
+    _c("li", [_c("app-qweet-action-reply", { staticClass: "mr-8" })], 1),
     _vm._v(" "),
     _c(
       "li",
-      { staticClass: "mr-8" },
-      [_c("app-qweet-action-reqweet", { attrs: { qweet: _vm.qweet } })],
+      [
+        _c("app-qweet-action-reqweet", {
+          staticClass: "mr-8",
+          attrs: { qweet: _vm.qweet }
+        })
+      ],
       1
     ),
     _vm._v(" "),
     _c(
       "li",
-      { staticClass: "mr-8" },
-      [_c("app-qweet-action-like", { attrs: { qweet: _vm.qweet } })],
+      [
+        _c("app-qweet-action-like", {
+          staticClass: "mr-8",
+          attrs: { qweet: _vm.qweet }
+        })
+      ],
       1
     )
   ])
@@ -62606,6 +62716,7 @@ var map = {
 	"./components/qweets/actions/AppQweetActionLike.vue": "./resources/js/components/qweets/actions/AppQweetActionLike.vue",
 	"./components/qweets/actions/AppQweetActionReply.vue": "./resources/js/components/qweets/actions/AppQweetActionReply.vue",
 	"./components/qweets/actions/AppQweetActionReqweet.vue": "./resources/js/components/qweets/actions/AppQweetActionReqweet.vue",
+	"./components/qweets/actions/AppQweetActionReqweetButton.vue": "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue",
 	"./components/qweets/actions/AppQweetActionsGroup.vue": "./resources/js/components/qweets/actions/AppQweetActionsGroup.vue",
 	"./components/qweets/variants/AppQweetVariantQuote.vue": "./resources/js/components/qweets/variants/AppQweetVariantQuote.vue",
 	"./components/qweets/variants/AppQweetVariantQweet.vue": "./resources/js/components/qweets/variants/AppQweetVariantQweet.vue",
@@ -63371,6 +63482,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19& */ "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19&");
+/* harmony import */ var _AppQweetActionReqweetButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppQweetActionReqweetButton.vue?vue&type=script&lang=js& */ "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AppQweetActionReqweetButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetActionReqweetButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppQweetActionReqweetButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetActionReqweetButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/qweets/actions/AppQweetActionReqweetButton.vue?vue&type=template&id=4bc1db19&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetActionReqweetButton_vue_vue_type_template_id_4bc1db19___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/qweets/actions/AppQweetActionsGroup.vue":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/qweets/actions/AppQweetActionsGroup.vue ***!
@@ -63834,10 +64014,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -63875,19 +64063,48 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     // }
 
   },
-  actions: {// async reqweetQweet (_, qweet) {
-    //   await axios.post(`/api/qweets/${qweet.id}/reqweets`)
-    // },
-    // async unreqweetQweet (_, qweet) {
-    //   await axios.delete(`/api/qweets/${qweet.id}/reqweets`)
-    // },
-    // syncReqweet ({ state, commit }, id) {
+  actions: {
+    reqweetQweet: function reqweetQweet(_, qweet) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/reqweets"));
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    unreqweetQweet: function unreqweetQweet(_, qweet) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/qweets/".concat(qweet.id, "/reqweets"));
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    } // syncReqweet ({ state, commit }, id) {
     //   if (state.reqweets.includes(id)) {
     //     commit('REMOVE_REQWEET', id)
     //     return
     //   }
     //   commit('ADD_REQWEET', id)
     // }
+
   }
 });
 

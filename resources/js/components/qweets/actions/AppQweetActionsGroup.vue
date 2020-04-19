@@ -1,13 +1,25 @@
 <template>
   <ul class="flex mt-4">
-    <li class="mr-8">
-      <app-qweet-action-reply/>
+
+    <!-- Reply -->
+    <li>
+      <app-qweet-action-reply class="mr-8"/>
     </li>
-    <li class="mr-8">
-      <app-qweet-action-reqweet :qweet="qweet"/>
+
+    <!-- Reqweet -->
+    <li>
+      <app-qweet-action-reqweet
+        :qweet="qweet"
+        class="mr-8"
+      />
     </li>
-    <li class="mr-8">
-      <app-qweet-action-like :qweet="qweet"/>
+
+    <!-- Like -->
+    <li>
+      <app-qweet-action-like
+        :qweet="qweet"
+        class="mr-8"
+      />
     </li>
   </ul>
 </template>
