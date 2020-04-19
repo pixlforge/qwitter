@@ -20,6 +20,19 @@ export default {
         })
       )
     },
+    SET_REQWEETS (state, { id, count }) {
+      state.qweets = state.qweets.map((qweet) => {
+        if (qweet.id === id) {
+          qweet.reqweets_count = count
+        }
+
+        if (get(qweet.original_qweet, 'id') === id) {
+          qweet.original_qweet.reqweets_count = count
+        }
+
+        return qweet
+      })
+    },
     SET_LIKES (state, { id, count }) {
       state.qweets = state.qweets.map((qweet) => {
         if (qweet.id === id) {

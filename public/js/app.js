@@ -62815,6 +62815,12 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
   }
 
   store.commit('timeline/SET_LIKES', event);
+}).listen('.QweetReqweetsUpdated', function (event) {
+  if (event.user_id == User.id) {
+    store.dispatch('reqweets/syncReqweet', event.id);
+  }
+
+  store.commit('timeline/SET_REQWEETS', event);
 });
 
 /***/ }),
@@ -64055,13 +64061,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _state$reqweets;
 
       (_state$reqweets = state.reqweets).push.apply(_state$reqweets, _toConsumableArray(reqweets));
-    } // ADD_REQWEET (state, id) {
-    //   state.reqweets.push(id)
-    // },
-    // REMOVE_REQWEET (state, id) {
-    //   state.reqweets = without(state.reqweets, id)
-    // }
-
+    },
+    ADD_REQWEET: function ADD_REQWEET(state, id) {
+      state.reqweets.push(id);
+    },
+    REMOVE_REQWEET: function REMOVE_REQWEET(state, id) {
+      state.reqweets = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["without"])(state.reqweets, id);
+    }
   },
   actions: {
     reqweetQweet: function reqweetQweet(_, qweet) {
@@ -64097,14 +64103,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }, _callee2);
       }))();
-    } // syncReqweet ({ state, commit }, id) {
-    //   if (state.reqweets.includes(id)) {
-    //     commit('REMOVE_REQWEET', id)
-    //     return
-    //   }
-    //   commit('ADD_REQWEET', id)
-    // }
+    },
+    syncReqweet: function syncReqweet(_ref, id) {
+      var state = _ref.state,
+          commit = _ref.commit;
 
+      if (state.reqweets.includes(id)) {
+        commit('REMOVE_REQWEET', id);
+        return;
+      }
+
+      commit('ADD_REQWEET', id);
+    }
   }
 });
 
@@ -64167,9 +64177,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }).includes(qweet.id);
       })));
     },
-    SET_LIKES: function SET_LIKES(state, _ref) {
+    SET_REQWEETS: function SET_REQWEETS(state, _ref) {
       var id = _ref.id,
           count = _ref.count;
+      state.qweets = state.qweets.map(function (qweet) {
+        if (qweet.id === id) {
+          qweet.reqweets_count = count;
+        }
+
+        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(qweet.original_qweet, 'id') === id) {
+          qweet.original_qweet.reqweets_count = count;
+        }
+
+        return qweet;
+      });
+    },
+    SET_LIKES: function SET_LIKES(state, _ref2) {
+      var id = _ref2.id,
+          count = _ref2.count;
       state.qweets = state.qweets.map(function (qweet) {
         if (qweet.id === id) {
           qweet.likes_count = count;
@@ -64184,14 +64209,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   actions: {
-    getQweets: function getQweets(_ref2, url) {
+    getQweets: function getQweets(_ref3, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var commit, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref2.commit;
+                commit = _ref3.commit;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
 

@@ -61,4 +61,11 @@ window.Echo.channel('qweets')
         }
 
         store.commit('timeline/SET_LIKES', event)
+    })
+    .listen('.QweetReqweetsUpdated', (event) => {
+        if (event.user_id == User.id) {
+            store.dispatch('reqweets/syncReqweet', event.id)
+        }
+
+        store.commit('timeline/SET_REQWEETS', event)
     });
