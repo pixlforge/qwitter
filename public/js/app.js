@@ -1969,6 +1969,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -48391,35 +48396,67 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "flex justify-between" }, [
+            _c("div"),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex justify-end items-center" }, [
+              _c("div", [_c("app-qweet-compose-limit")], 1),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue-500 rounded-full font-bold leading-none text-center px-4 py-3",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("\n          Qweet\n        ")]
+              )
+            ])
+          ])
         ],
         1
       )
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-between" }, [
-      _c("div"),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-blue-500 rounded-full font-bold leading-none text-center px-4 py-3",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("\n          Qweet\n        ")]
-        )
-      ])
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "w-10 h-10 relative" }, [
+    _c("svg", { attrs: { viewBox: "0 0 120 120" } }, [
+      _c("circle", {
+        staticClass: "stroke-current text-gray-700",
+        attrs: {
+          cx: "60",
+          cy: "60",
+          radius: "100",
+          fill: "none",
+          "stroke-width": "8"
+        }
+      })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62708,6 +62745,7 @@ module.exports = function(module) {
 
 var map = {
 	"./components/compose/AppQweetCompose.vue": "./resources/js/components/compose/AppQweetCompose.vue",
+	"./components/compose/AppQweetComposeLimit.vue": "./resources/js/components/compose/AppQweetComposeLimit.vue",
 	"./components/compose/AppQweetComposeTextarea.vue": "./resources/js/components/compose/AppQweetComposeTextarea.vue",
 	"./components/dropdown/AppDropdown.vue": "./resources/js/components/dropdown/AppDropdown.vue",
 	"./components/dropdown/AppDropdownItem.vue": "./resources/js/components/dropdown/AppDropdownItem.vue",
@@ -62949,6 +62987,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetCompose_vue_vue_type_template_id_2dd0db6d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetCompose_vue_vue_type_template_id_2dd0db6d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/compose/AppQweetComposeLimit.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/compose/AppQweetComposeLimit.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppQweetComposeLimit.vue?vue&type=template&id=399e4604& */ "./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/compose/AppQweetComposeLimit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AppQweetComposeLimit.vue?vue&type=template&id=399e4604& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/compose/AppQweetComposeLimit.vue?vue&type=template&id=399e4604&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppQweetComposeLimit_vue_vue_type_template_id_399e4604___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

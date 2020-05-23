@@ -22,7 +22,12 @@
           <!-- Actions -->
         </div>
 
-        <div>
+        <div class="flex justify-end items-center">
+
+          <div>
+            <app-qweet-compose-limit/>
+          </div>
+          
           <button
             type="submit"
             class="bg-blue-500 rounded-full font-bold leading-none text-center px-4 py-3"
