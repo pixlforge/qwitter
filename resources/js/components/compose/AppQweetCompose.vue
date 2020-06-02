@@ -25,7 +25,10 @@
         <div class="flex justify-end items-center">
 
           <div>
-            <app-qweet-compose-limit/>
+            <app-qweet-compose-limit
+              :body="form.body"
+              class="mr-2"
+            />
           </div>
           
           <button

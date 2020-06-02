@@ -15,11 +15,15 @@
         :r="radius"
         :stroke-dasharray="dash"
         :stroke-dashoffset="offset"
+        :class="{
+          'text-red-600': percentageIsOver,
+          'text-blue-500': !percentageIsOver
+        }"
         cx="60"
         cy="60"
         fill="none"
         stroke-width="8"
-        class="stroke-current text-blue-500"
+        class="stroke-current"
       />
 
     </svg>
@@ -28,6 +32,12 @@
 
 <script>
 export default {
+  props: {
+    body: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       radius: 30
@@ -37,11 +47,19 @@ export default {
     dash () {
       return 2 * Math.PI * this.radius
     },
+    percentageIsOver() {
+      return this.percentage > 100
+    },
+    percentage () {
+      return Math.round((this.body.length * 100) / 280)
+    },
+    displayPercentage () {
+      return this.percentage <= 100 ? this.percentage : 100
+    },
     offset () {
-      let circ = this.dash
-      let progress = 50 / 100
+      let progress = this.displayPercentage / 100
 
-      return circ * (1 - progress)
+      return this.dash * (1 - progress)
     }
   }
 }
