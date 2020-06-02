@@ -15,12 +15,17 @@
     <div class="flex-grow">
       
       <!-- Compose -->
-      <app-qweet-compose-textarea v-model="form.body"/>
+      <app-qweet-compose-textarea v-model="form.body" />
 
       <div class="flex justify-between">
-        <div>
-          <!-- Actions -->
-        </div>
+        <ul class="flex items-center">
+          <li class="mr-4">
+            <app-qweet-compose-media-button
+              @selected="handleMediaSelected"
+              id="media-compose"
+            />
+          </li>
+        </ul>
 
         <div class="flex justify-end items-center">
 
@@ -52,7 +57,12 @@ export default {
   data () {
     return {
       form: {
-        body: ''
+        body: '',
+        media: []
+      },
+      media: {
+        images: [],
+        video: null
       }
     }
   },
@@ -64,6 +74,9 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    handleMediaSelected (files) {
+      console.log(files)
     }
   }
 }
