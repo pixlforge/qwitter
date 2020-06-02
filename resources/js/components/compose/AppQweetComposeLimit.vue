@@ -16,14 +16,13 @@
         :stroke-dasharray="dash"
         :stroke-dashoffset="offset"
         :class="{
-          'text-red-600': percentageIsOver,
-          'text-blue-500': !percentageIsOver
+          '!text-red-600': percentageIsOver,
         }"
         cx="60"
         cy="60"
         fill="none"
         stroke-width="8"
-        class="stroke-current"
+        class="stroke-current text-blue-500"
       />
 
     </svg>
