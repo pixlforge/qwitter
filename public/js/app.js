@@ -1996,12 +1996,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2097,6 +2091,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this3.media.video = file;
           _this3.media.images = [];
         }
+      });
+    },
+    handleVideoRemove: function handleVideoRemove() {
+      this.media.video = null;
+    },
+    handleImageRemove: function handleImageRemove(imageToRemove) {
+      this.media.images = this.media.images.filter(function (image) {
+        return image != imageToRemove;
       });
     }
   }
@@ -2282,6 +2284,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     images: {
@@ -2310,6 +2321,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49466,19 +49486,17 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-gray-700" }, [
-            _vm._v("\n      " + _vm._s(_vm.media) + "\n    ")
-          ]),
-          _vm._v(" "),
           _vm.media.images.length
             ? _c("app-qweet-image-preview", {
-                attrs: { images: _vm.media.images }
+                attrs: { images: _vm.media.images },
+                on: { "image:remove": _vm.handleImageRemove }
               })
             : _vm._e(),
           _vm._v(" "),
           _vm.media.video
             ? _c("app-qweet-video-preview", {
-                attrs: { video: _vm.media.video }
+                attrs: { video: _vm.media.video },
+                on: { "video:remove": _vm.handleVideoRemove }
               })
             : _vm._e(),
           _vm._v(" "),
@@ -49722,7 +49740,44 @@ var render = function() {
               src: _vm.generateImagePreview(image),
               alt: "Preview image"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "w-8 h-8 absolute top-0 right-0 flex justify-center items-center bg-gray-900 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white transition-colors duration-100 ease-out mr-3 mt-3",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.$emit("image:remove", image)
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 24 24",
+                    width: "24",
+                    height: "24"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
         ]
       )
     }),
@@ -49751,7 +49806,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mb-4" }, [
+  return _c("div", { staticClass: "relative mb-4" }, [
     _c("video", {
       staticClass: "w-full rounded-lg",
       attrs: {
@@ -49759,7 +49814,44 @@ var render = function() {
         controls: "",
         preload: ""
       }
-    })
+    }),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass:
+          "w-8 h-8 absolute top-0 right-0 flex justify-center items-center bg-gray-900 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white transition-colors duration-100 ease-out mr-3 mt-3",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.$emit("video:remove")
+          }
+        }
+      },
+      [
+        _c(
+          "svg",
+          {
+            staticClass: "fill-current",
+            attrs: {
+              xmlns: "http://www.w3.org/2000/svg",
+              viewBox: "0 0 24 24",
+              width: "24",
+              height: "24"
+            }
+          },
+          [
+            _c("path", {
+              attrs: {
+                d:
+                  "M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
+              }
+            })
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []

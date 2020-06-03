@@ -17,23 +17,17 @@
       <!-- Compose -->
       <app-qweet-compose-textarea v-model="form.body" />
 
-      <!--
-        Media object
-        TODO: Delete
-      -->
-      <span class="text-gray-700">
-        {{ media }}
-      </span>
-
       <!-- Image preview -->
       <app-qweet-image-preview
         v-if="media.images.length"
+        @image:remove="handleImageRemove"
         :images="media.images"
       />
 
       <!-- Video preview -->
       <app-qweet-video-preview
         v-if="media.video"
+        @video:remove="handleVideoRemove"
         :video="media.video"
       />
 
@@ -118,6 +112,14 @@ export default {
           this.media.video = file
           this.media.images = []
         }
+      })
+    },
+    handleVideoRemove () {
+      this.media.video = null
+    },
+    handleImageRemove (imageToRemove) {
+      this.media.images = this.media.images.filter((image) => {
+        return image != imageToRemove
       })
     }
   }
