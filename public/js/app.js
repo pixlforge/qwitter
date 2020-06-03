@@ -1982,6 +1982,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1993,8 +1997,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       media: {
         images: [],
         video: null
-      }
+      },
+      mediaTypes: {}
     };
+  },
+  mounted: function mounted() {
+    this.getMediaTypes();
   },
   methods: {
     submit: function submit() {
@@ -2027,8 +2035,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 6]]);
       }))();
     },
+    getMediaTypes: function getMediaTypes() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/media/types');
+
+              case 3:
+                res = _context2.sent;
+                _this2.mediaTypes = res.data.data;
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    },
     handleMediaSelected: function handleMediaSelected(files) {
-      console.log(files);
+      var _this3 = this;
+
+      var filesList = Array.from(files).slice(0, 4).forEach(function (file) {
+        if (_this3.mediaTypes.image.includes(file.type)) {
+          _this3.media.images.push(file);
+        }
+
+        if (_this3.mediaTypes.video.includes(file.type)) {
+          _this3.media.video = file;
+        }
+      });
+
+      if (this.media.video) {
+        this.media.images = [];
+      }
     }
   }
 });
@@ -49316,6 +49370,10 @@ var render = function() {
               expression: "form.body"
             }
           }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-gray-700" }, [
+            _vm._v("\n      " + _vm._s(_vm.media) + "\n    ")
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
             _c("ul", { staticClass: "flex items-center" }, [

@@ -17,6 +17,10 @@
       <!-- Compose -->
       <app-qweet-compose-textarea v-model="form.body" />
 
+      <span class="text-gray-700">
+        {{ media }}
+      </span>
+
       <div class="flex justify-between">
         <ul class="flex items-center">
           <li class="mr-4">
@@ -63,8 +67,12 @@ export default {
       media: {
         images: [],
         video: null
-      }
+      },
+      mediaTypes: {}
     }
+  },
+  mounted () {
+    this.getMediaTypes()
   },
   methods: {
     async submit () {
@@ -75,8 +83,28 @@ export default {
         console.log(e)
       }
     },
+    async getMediaTypes () {
+      try {
+        const res = await axios.get('/api/media/types')
+        this.mediaTypes = res.data.data
+      } catch (e) {
+        console.log(e)
+      }
+    },
     handleMediaSelected (files) {
-      console.log(files)
+      const filesList = Array.from(files).slice(0, 4).forEach((file) => {
+        if (this.mediaTypes.image.includes(file.type)) {
+          this.media.images.push(file)
+        }
+
+        if (this.mediaTypes.video.includes(file.type)) {
+          this.media.video = file
+        }
+      })
+
+      if (this.media.video) {
+        this.media.images = []
+      }
     }
   }
 }

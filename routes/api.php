@@ -2,8 +2,14 @@
 
 use App\Http\Controllers\Api\Qweets\QweetController;
 use App\Http\Controllers\Api\Qweets\QweetLikeController;
+use App\Http\Controllers\Api\Media\MediaTypesController;
 use App\Http\Controllers\Api\Timeline\TimelineController;
 use App\Http\Controllers\Api\Qweets\QweetReqweetController;
+
+/**
+ * Media
+ */
+Route::get('/media/types', [MediaTypesController::class, 'index'])->name('media.types.index');
 
 /**
  * Qweet
