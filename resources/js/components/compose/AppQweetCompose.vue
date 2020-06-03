@@ -5,7 +5,7 @@
   >
 
     <!-- Avatar -->
-    <div class="mr-3">
+    <div class="flex-shrink-0 mr-3">
       <img
           :src="$user.avatar_url"
           class="w-12 rounded-full"
@@ -17,9 +17,25 @@
       <!-- Compose -->
       <app-qweet-compose-textarea v-model="form.body" />
 
+      <!--
+        Media object
+        TODO: Delete
+      -->
       <span class="text-gray-700">
         {{ media }}
       </span>
+
+      <!-- Image preview -->
+      <app-qweet-image-preview
+        v-if="media.images.length"
+        :images="media.images"
+      />
+
+      <!-- Video preview -->
+      <app-qweet-video-preview
+        v-if="media.video"
+        :video="media.video"
+      />
 
       <div class="flex justify-between">
         <ul class="flex items-center">
@@ -92,19 +108,17 @@ export default {
       }
     },
     handleMediaSelected (files) {
-      const filesList = Array.from(files).slice(0, 4).forEach((file) => {
+      Array.from(files).slice(0, 4).forEach((file) => {
         if (this.mediaTypes.image.includes(file.type)) {
           this.media.images.push(file)
+          this.media.video = null
         }
 
         if (this.mediaTypes.video.includes(file.type)) {
           this.media.video = file
+          this.media.images = []
         }
       })
-
-      if (this.media.video) {
-        this.media.images = []
-      }
     }
   }
 }
