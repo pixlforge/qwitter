@@ -87,11 +87,38 @@ export default {
   methods: {
     async submit () {
       try {
+        const media = await this.uploadMedia()
+
+        this.form.media = media.data.data.map((m) => m.id)
+        
         await axios.post('/api/qweets', this.form)
+        
         this.form.body = ''
       } catch (e) {
         console.log(e)
       }
+    },
+    async uploadMedia () {
+      return await axios.post('/api/media', this.buildMediaForm(), {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+    },
+    buildMediaForm () {
+      const form = new FormData()
+      
+      if (this.media.images.length) {
+        this.media.images.forEach((image, index) => {
+          form.append(`media[${index}]`, image)
+        })
+      }
+
+      if (this.media.video) {
+        form.append('media[0]', this.media.video)
+      }
+
+      return form
     },
     async getMediaTypes () {
       try {

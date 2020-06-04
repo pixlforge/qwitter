@@ -22,9 +22,9 @@ class MediaController extends Controller
      * Upload media files.
      *
      * @param MediaStoreRequest $request
-     * @return void
+     * @return QweetMediaCollection
      */
-    public function store(MediaStoreRequest $request)
+    public function store(MediaStoreRequest $request): QweetMediaCollection
     {
         $result = collect($request->media)->map(function ($media) {
             return $this->addMedia($media);
