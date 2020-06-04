@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
-use App\Events\Qweets\QweetReqweetsUpdated;
 use App\Qweet;
 use App\Qweets\QweetType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Events\Qweets\QweetWasCreated;
 use App\Events\Qweets\QweetWasDeleted;
+use App\Events\Qweets\QweetReqweetsUpdated;
 
 class QweetReqweetController extends Controller
 {

@@ -64,4 +64,14 @@ class Qweet extends Model
     {
         return $this->hasOne(Qweet::class, 'original_qweet_id', 'id');
     }
+
+    /**
+     * Qweet media relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function media()
+    {
+        return $this->hasMany(QweetMedia::class);
+    }
 }

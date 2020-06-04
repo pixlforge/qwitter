@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api\Media;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Media\MimeTypes;
+use App\Http\Controllers\Controller;
 
 class MediaTypesController extends Controller
 {

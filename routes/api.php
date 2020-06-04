@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Media\MediaController;
 use App\Http\Controllers\Api\Qweets\QweetController;
 use App\Http\Controllers\Api\Qweets\QweetLikeController;
 use App\Http\Controllers\Api\Media\MediaTypesController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Api\Qweets\QweetReqweetController;
 /**
  * Media
  */
+Route::post('/media', [MediaController::class, 'store']);
 Route::get('/media/types', [MediaTypesController::class, 'index'])->name('media.types.index');
 
 /**
