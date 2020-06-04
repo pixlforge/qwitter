@@ -2893,11 +2893,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     qweet: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    images: function images() {
+      return this.qweet.media.data.filter(function (m) {
+        return m.type === 'image';
+      });
+    },
+    video: function video() {
+      return this.qweet.media.data.filter(function (m) {
+        return m.type === 'video';
+      });
     }
   }
 });
@@ -50470,6 +50499,26 @@ var render = function() {
         _c("p", { staticClass: "text-gray-300 whitespace-pre-wrap" }, [
           _vm._v(_vm._s(_vm.qweet.body))
         ]),
+        _vm._v(" "),
+        _vm.images.length
+          ? _c(
+              "div",
+              { staticClass: "flex flex-wrap rounded-lg overflow-hidden my-4" },
+              _vm._l(_vm.images, function(image, index) {
+                return _c(
+                  "div",
+                  { key: index, staticClass: "w-1/2 flex-grow" },
+                  [
+                    _c("img", {
+                      staticClass: "w-full block",
+                      attrs: { src: image.url, alt: "Image" }
+                    })
+                  ]
+                )
+              }),
+              0
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c("app-qweet-actions-group", { attrs: { qweet: _vm.qweet } })
       ],

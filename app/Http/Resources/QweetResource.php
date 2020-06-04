@@ -22,6 +22,7 @@ class QweetResource extends JsonResource
             'user' => UserResource::make($this->user),
             'likes_count' => $this->likes->count(),
             'reqweets_count' => $this->reqweets->count(),
+            'media' => new MediaCollection($this->media),
             'created_at' => $this->created_at->timestamp
         ];
     }
