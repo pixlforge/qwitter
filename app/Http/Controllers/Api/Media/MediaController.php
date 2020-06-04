@@ -6,6 +6,7 @@ use App\QweetMedia;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Media\MediaStoreRequest;
+use App\Http\Resources\QweetMediaCollection;
 
 class MediaController extends Controller
 {
@@ -14,7 +15,7 @@ class MediaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        // $this->middleware(['auth:sanctum']);
     }
     
     /**
@@ -28,6 +29,8 @@ class MediaController extends Controller
         $result = collect($request->media)->map(function ($media) {
             return $this->addMedia($media);
         });
+
+        return new QweetMediaCollection($result);
     }
 
     /**
@@ -35,14 +38,16 @@ class MediaController extends Controller
      * with a QweetMedia object.
      *
      * @param UploadedFile $media
-     * @return void
+     * @return QweetMedia
      */
-    protected function addMedia(UploadedFile $media): void
+    protected function addMedia(UploadedFile $media): QweetMedia
     {
         $qweetMedia = QweetMedia::create([]);
         
         $qweetMedia->baseMedia()->associate(
             $qweetMedia->addMedia($media)->toMediaCollection()
         )->save();
+
+        return $qweetMedia;
     }
 }
