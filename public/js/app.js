@@ -2030,29 +2030,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 media = _context.sent;
-                _this.form.media = media.data.data.map(function (m) {
-                  return m.id;
-                });
+                _this.form.media = _this.mapMediaIds(media);
                 _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/qweets', _this.form);
 
               case 7:
                 _this.form.body = '';
-                _context.next = 13;
+                _this.form.media = [];
+                _this.media.video = null;
+                _this.media.images = [];
+                _context.next = 16;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 13:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee, null, [[0, 13]]);
       }))();
+    },
+    mapMediaIds: function mapMediaIds(media) {
+      return media.data.data.map(function (m) {
+        return m.id;
+      });
     },
     uploadMedia: function uploadMedia() {
       var _this2 = this;

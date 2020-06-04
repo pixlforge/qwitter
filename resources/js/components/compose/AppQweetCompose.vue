@@ -89,14 +89,20 @@ export default {
       try {
         const media = await this.uploadMedia()
 
-        this.form.media = media.data.data.map((m) => m.id)
+        this.form.media = this.mapMediaIds(media)
         
         await axios.post('/api/qweets', this.form)
         
         this.form.body = ''
+        this.form.media = []
+        this.media.video = null
+        this.media.images = []
       } catch (e) {
         console.log(e)
       }
+    },
+    mapMediaIds (media) {
+      return media.data.data.map((m) => m.id)
     },
     async uploadMedia () {
       return await axios.post('/api/media', this.buildMediaForm(), {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
+use App\QweetMedia;
 use App\Qweets\QweetType;
 use App\Events\Qweets\QweetWasCreated;
 use App\Http\Controllers\Controller;
@@ -17,11 +18,22 @@ class QweetController extends Controller
         $this->middleware(['auth:sanctum'])->only('store');
     }
 
-    public function store(QweetStoreRequest $request)
+    /**
+     * Store a new qweet.
+     *
+     * @param QweetStoreRequest $request
+     * @return void
+     */
+    public function store(QweetStoreRequest $request): void
     {
         $qweet = $request->user()->qweets()->create(array_merge($request->only('body'), [
             'type' => QweetType::QWEET
         ]));
+
+        // Associate qweet media with qweet
+        foreach ($request->media as $id) {
+            $qweet->media()->save(QweetMedia::find($id));
+        }
 
         QweetWasCreated::broadcast($qweet);
     }
