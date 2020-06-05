@@ -2,8 +2,8 @@
   <textarea
     :value="value"
     @input="$emit('input', $event.target.value); resize($event)"
+    :placeholder="placeholder"
     id=""
-    placeholder="What's happening?"
     class="w-full bg-gray-900 outline-none focus:shadow-outline text-lg resize-none mb-2"
   ></textarea>
 </template>
@@ -16,6 +16,13 @@ export default {
       required: false,
       default () {
         return ''
+      }
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default() {
+        return ""
       }
     }
   },

@@ -2,7 +2,7 @@
   <div>
 
     <!-- Composition -->
-    <app-qweet-compose />
+    <app-qweet-reqweet-compose />
     
     <!-- Reqweet -->
     <component

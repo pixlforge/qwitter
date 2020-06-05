@@ -17,42 +17,11 @@
       <!-- Compose -->
       <app-qweet-compose-textarea
         v-model="form.body"
-        placeholder="What's happening?"
+        placeholder="Add a comment"
       />
 
-      <!-- Media upload progress -->
-      <app-qweet-media-progress
-        v-if="media.progress"
-        :progress="media.progress"
-        class="mb-4"
-      />
-
-      <!-- Image preview -->
-      <app-qweet-image-preview
-        v-if="media.images.length"
-        @image:remove="handleImageRemove"
-        :images="media.images"
-      />
-
-      <!-- Video preview -->
-      <app-qweet-video-preview
-        v-if="media.video"
-        @video:remove="handleVideoRemove"
-        :video="media.video"
-      />
-
-      <div class="flex justify-between">
-        <ul class="flex items-center">
-          <li class="mr-4">
-            <app-qweet-compose-media-button
-              @selected="handleMediaSelected"
-              id="media-compose"
-            />
-          </li>
-        </ul>
-
+      <div class="flex justify-end">
         <div class="flex justify-end items-center">
-
           <div>
             <app-qweet-compose-limit
               :body="form.body"
@@ -64,7 +33,7 @@
             type="submit"
             class="bg-blue-500 rounded-full font-bold leading-none text-center px-4 py-3"
           >
-            Qweet
+            Reqweet
           </button>
         </div>
       </div>
@@ -84,7 +53,7 @@ export default {
   ],
   methods: {
     async post () {
-      return await axios.post('/api/qweets', this.form)
+      console.log('Create a reqweet with a comment')
     }
   }
 }
