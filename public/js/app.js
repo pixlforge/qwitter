@@ -2555,6 +2555,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     qweet: {
@@ -50217,7 +50227,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n  " + _vm._s(_vm.qweet) + "\n")])
+  return _c(
+    "div",
+    [
+      _c("app-qweet-compose"),
+      _vm._v(" "),
+      _vm.qweet
+        ? _c("app-qweet-variant-" + _vm.qweet.type, {
+            tag: "component",
+            staticClass:
+              "border border-solid border-gray-700 rounded-lg p-4 mt-4",
+            attrs: { qweet: _vm.qweet }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

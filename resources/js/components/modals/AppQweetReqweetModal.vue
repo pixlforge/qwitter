@@ -1,6 +1,16 @@
 <template>
   <div>
-    {{ qweet }}
+
+    <!-- Composition -->
+    <app-qweet-compose />
+    
+    <!-- Reqweet -->
+    <component
+      v-if="qweet"
+      :is="`app-qweet-variant-${qweet.type}`"
+      :qweet="qweet"
+      class="border border-solid border-gray-700 rounded-lg p-4 mt-4"
+    />
   </div>
 </template>
 
