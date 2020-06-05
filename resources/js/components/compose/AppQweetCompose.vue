@@ -17,6 +17,13 @@
       <!-- Compose -->
       <app-qweet-compose-textarea v-model="form.body" />
 
+      <!-- Media upload progress -->
+      <app-qweet-media-progress
+        v-if="media.progress"
+        :progress="media.progress"
+        class="mb-4"
+      />
+
       <!-- Image preview -->
       <app-qweet-image-preview
         v-if="media.images.length"
@@ -76,7 +83,8 @@ export default {
       },
       media: {
         images: [],
-        video: null
+        video: null,
+        progress: 0
       },
       mediaTypes: {}
     }
@@ -87,9 +95,10 @@ export default {
   methods: {
     async submit () {
       try {
-        const media = await this.uploadMedia()
-
-        this.form.media = this.mapMediaIds(media)
+        if (this.media.images.length || this.media.video) {
+          const media = await this.uploadMedia()
+          this.form.media = this.mapMediaIds(media)
+        }
         
         await axios.post('/api/qweets', this.form)
         
@@ -97,6 +106,7 @@ export default {
         this.form.media = []
         this.media.video = null
         this.media.images = []
+        this.media.progress = 0
       } catch (e) {
         console.log(e)
       }
@@ -108,8 +118,12 @@ export default {
       return await axios.post('/api/media', this.buildMediaForm(), {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
+        onUploadProgress: this.handleUploadProgress
       })
+    },
+    handleUploadProgress (event) {
+      this.media.progress = parseInt(Math.round((event.loaded / event.total) * 100))
     },
     buildMediaForm () {
       const form = new FormData()

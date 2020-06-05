@@ -14,6 +14,7 @@
 
     <div
       v-if="qweets.length"
+      class="mb-10"
       v-observe-visibility="{
         callback: handleScrolledToBottomOfTimeline
       }"
