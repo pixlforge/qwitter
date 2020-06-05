@@ -28,8 +28,8 @@ class TimelineController extends Controller
             $request->user()
                 ->qweetsFromFollowing()
                 ->with([
-                    'user', 'likes', 'reqweets',
-                    'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets'
+                    'user', 'likes', 'reqweets', 'media.baseMedia',
+                    'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets', 'originalQweet.media.baseMedia'
                 ])
                 ->latest()
                 ->paginate(7)
