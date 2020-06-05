@@ -13,7 +13,7 @@
       </app-dropdown-item>
 
       <!-- Reqweet with comment -->
-      <app-dropdown-item>
+      <app-dropdown-item @click.prevent="$modal.show(AppQweetReqweetModal, { qweet })">
         Reqweet with comment
       </app-dropdown-item>
     </app-dropdown>
@@ -30,12 +30,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import AppQweetReqweetModal from '../../modals/AppQweetReqweetModal'
 
 export default {
   props: {
     qweet: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      AppQweetReqweetModal
     }
   },
   computed: {
