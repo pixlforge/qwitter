@@ -2910,6 +2910,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     qweet: {
@@ -2926,7 +2942,7 @@ __webpack_require__.r(__webpack_exports__);
     video: function video() {
       return this.qweet.media.data.filter(function (m) {
         return m.type === 'video';
-      });
+      })[0];
     }
   }
 });
@@ -50518,6 +50534,21 @@ var render = function() {
               }),
               0
             )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.video
+          ? _c("div", { staticClass: "my-4" }, [
+              _c("video", {
+                staticClass: "w-full rounded-lg",
+                attrs: {
+                  src: _vm.video.url,
+                  controls: "",
+                  preload: "",
+                  muted: ""
+                },
+                domProps: { muted: true }
+              })
+            ])
           : _vm._e(),
         _vm._v(" "),
         _c("app-qweet-actions-group", { attrs: { qweet: _vm.qweet } })

@@ -17,6 +17,7 @@
       <!-- Body -->
       <p class="text-gray-300 whitespace-pre-wrap">{{ qweet.body }}</p>
 
+      <!-- Images -->
       <div
         v-if="images.length"
         class="flex flex-wrap rounded-lg overflow-hidden my-4"
@@ -32,6 +33,21 @@
             class="w-full block"
           >
         </div>
+      </div>
+
+      <!-- Video -->
+      <div
+        v-if="video"
+        class="my-4"
+      >
+        <video
+          :src="video.url"
+          class="w-full rounded-lg"
+          controls
+          preload
+          muted
+        >
+        </video>
       </div>
 
       <!-- Actions -->
@@ -54,7 +70,7 @@ export default {
       return this.qweet.media.data.filter(m => m.type === 'image')
     },
     video () {
-      return this.qweet.media.data.filter(m => m.type === 'video')
+      return this.qweet.media.data.filter(m => m.type === 'video')[0]
     }
   }
 }
