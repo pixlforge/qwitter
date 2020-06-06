@@ -27,7 +27,6 @@ class QweetReqweetController extends Controller
         ]);
 
         QweetWasCreated::broadcast($reqweet);
-
         QweetReqweetsUpdated::broadcast($request->user(), $qweet);
     }
 

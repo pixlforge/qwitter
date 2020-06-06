@@ -46,14 +46,29 @@
 <script>
 import axios from 'axios'
 import compose from '../../mixins/compose'
+import { mapActions } from 'vuex'
 
 export default {
   mixins: [
     compose
   ],
+  props: {
+    qweet: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
+    ...mapActions({
+      quoteQweet: 'timeline/quoteQweet'
+    }),
     async post () {
-      console.log('Create a reqweet with a comment')
+      await this.quoteQweet({
+        qweet: this.qweet,
+        data: this.form
+      })
+
+      this.$emit('quote:success')
     }
   }
 }

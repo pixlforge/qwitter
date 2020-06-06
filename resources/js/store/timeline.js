@@ -61,6 +61,9 @@ export default {
       commit('reqweets/SET_REQWEETS', res.data.meta.reqweets, { root: true })
 
       return res
+    },
+    async quoteQweet (_, { qweet, data }) {
+      await axios.post(`/api/qweets/${qweet.id}/quotes`, data)
     }
   }
 }

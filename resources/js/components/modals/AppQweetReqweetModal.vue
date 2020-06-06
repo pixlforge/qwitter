@@ -2,7 +2,10 @@
   <div>
 
     <!-- Composition -->
-    <app-qweet-reqweet-compose />
+    <app-qweet-reqweet-compose
+      @quote:success="$emit('close')"
+      :qweet="qweet"
+    />
     
     <!-- Reqweet -->
     <component
