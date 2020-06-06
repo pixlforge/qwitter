@@ -1,5 +1,6 @@
 <template>
   <a
+    @click.prevent="$modal.show(AppQweetReplyModal, { qweet })"
     href="#"
     class="flex items-center text-gray-600 hover:text-gray-200 transition-colors duration-100 ease-out"
   >
@@ -19,11 +20,18 @@
 </template>
 
 <script>
+import AppQweetReplyModal from '../../modals/AppQweetReplyModal'
+
 export default {
   props: {
     qweet: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      AppQweetReplyModal
     }
   }
 }
