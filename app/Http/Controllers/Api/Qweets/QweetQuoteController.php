@@ -12,6 +12,14 @@ use App\Events\Qweets\QweetReqweetsUpdated;
 class QweetQuoteController extends Controller
 {
     /**
+     * QweetQuoteController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /**
      * Store a new reqweet with a quote.
      *
      * @param Qweet $qweet

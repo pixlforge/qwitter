@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Qweets\QweetController;
 use App\Http\Controllers\Api\Qweets\QweetLikeController;
 use App\Http\Controllers\Api\Media\MediaTypesController;
 use App\Http\Controllers\Api\Qweets\QweetQuoteController;
+use App\Http\Controllers\Api\Qweets\QweetReplyController;
 use App\Http\Controllers\Api\Timeline\TimelineController;
 use App\Http\Controllers\Api\Qweets\QweetReqweetController;
 
@@ -15,7 +16,7 @@ Route::post('/media', [MediaController::class, 'store']);
 Route::get('/media/types', [MediaTypesController::class, 'index'])->name('media.types.index');
 
 /**
- * Qweet
+ * Qweets
  */
 Route::post('/qweets', [QweetController::class, 'store'])->name('qweet.store');
 
@@ -24,6 +25,11 @@ Route::post('/qweets', [QweetController::class, 'store'])->name('qweet.store');
  */
 Route::post('/qweets/{qweet}/likes', [QweetLikeController::class, 'store'])->name('qweet.like.store');
 Route::delete('/qweets/{qweet}/likes', [QweetLikeController::class, 'destroy'])->name('qweet.like.destroy');
+
+/**
+ * Replies
+ */
+Route::post('/qweets/{qweet}/replies', [QweetReplyController::class, 'store'])->name('qweet.reply.store');
 
 /**
  * Reqweets

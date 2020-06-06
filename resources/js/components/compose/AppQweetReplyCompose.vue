@@ -76,6 +76,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 import compose from '../../mixins/compose'
 
 export default {
@@ -89,8 +90,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      replyToQweet: 'timeline/replyToQweet'
+    }),
     async post () {
-      console.log('Reply')
+      await this.replyToQweet({
+        qweet: this.qweet,
+        data: this.form
+      })
+
       this.$emit('reply:success')
     }
   }

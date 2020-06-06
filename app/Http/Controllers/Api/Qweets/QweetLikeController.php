@@ -10,6 +10,14 @@ use App\Events\Qweets\QweetLikesUpdated;
 class QweetLikeController extends Controller
 {
     /**
+     * QweetLikeController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /**
      * Store a new like.
      *
      * @param Qweet $qweet

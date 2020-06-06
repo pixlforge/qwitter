@@ -64,6 +64,9 @@ export default {
     },
     async quoteQweet (_, { qweet, data }) {
       await axios.post(`/api/qweets/${qweet.id}/quotes`, data)
-    }
+    },
+    async replyToQweet (_, { qweet, data }) {
+      await axios.post(`/api/qweets/${qweet.id}/replies`, data)
+    },
   }
 }

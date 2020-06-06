@@ -13,6 +13,14 @@ use App\Events\Qweets\QweetReqweetsUpdated;
 class QweetReqweetController extends Controller
 {
     /**
+     * QweetReqweetController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+    
+    /**
      * Store a new reqweet.
      *
      * @param Qweet $qweet
