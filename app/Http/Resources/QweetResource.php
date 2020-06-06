@@ -23,6 +23,8 @@ class QweetResource extends JsonResource
             'likes_count' => $this->likes->count(),
             'reqweets_count' => $this->reqweets->count(),
             'media' => new MediaCollection($this->media),
+            'replies_count' => $this->replies->count(),
+            'replies' => new QweetCollection($this->replies),
             'created_at' => $this->created_at->timestamp
         ];
     }

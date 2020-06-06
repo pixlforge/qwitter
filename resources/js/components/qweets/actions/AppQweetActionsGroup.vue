@@ -3,7 +3,10 @@
 
     <!-- Reply -->
     <li>
-      <app-qweet-action-reply class="mr-8"/>
+      <app-qweet-action-reply
+        :qweet="qweet"
+        class="mr-8"
+      />
     </li>
 
     <!-- Reqweet -->

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Qweet extends Model
@@ -14,6 +15,17 @@ class Qweet extends Model
     protected $fillable = [
         'body', 'type', 'original_qweet_id',
     ];
+
+    /**
+     * Scope query by top level parent qweets.
+     *
+     * @param Builder $builder
+     * @return Builder
+     */
+    public function scopeParent(Builder $builder): Builder
+    {
+        return $builder->whereNull('parent_id');
+    }
     
     /**
      * User relationship.
@@ -73,5 +85,15 @@ class Qweet extends Model
     public function media()
     {
         return $this->hasMany(QweetMedia::class);
+    }
+
+    /**
+     * Replies relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function replies()
+    {
+        return $this->hasMany(Qweet::class, 'parent_id');
     }
 }

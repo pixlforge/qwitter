@@ -27,9 +27,10 @@ class TimelineController extends Controller
         return QweetCollection::make(
             $request->user()
                 ->qweetsFromFollowing()
+                ->parent()
                 ->with([
-                    'user', 'likes', 'reqweets', 'media.baseMedia',
-                    'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets', 'originalQweet.media.baseMedia'
+                    'user', 'likes', 'reqweets', 'replies', 'media.baseMedia',
+                    'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets', 'originalQweet.replies', 'originalQweet.media.baseMedia'
                 ])
                 ->latest()
                 ->paginate(7)
