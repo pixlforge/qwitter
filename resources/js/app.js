@@ -73,6 +73,9 @@ window.Echo.channel('qweets')
 
         store.commit('timeline/SET_LIKES', event)
     })
+    .listen('.QweetRepliesUpdated', (event) => {
+        store.commit('timeline/SET_REPLIES', event)
+    })
     .listen('.QweetReqweetsUpdated', (event) => {
         if (event.user_id == User.id) {
             store.dispatch('reqweets/syncReqweet', event.id)

@@ -65101,6 +65101,8 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
   }
 
   store.commit('timeline/SET_LIKES', event);
+}).listen('.QweetRepliesUpdated', function (event) {
+  store.commit('timeline/SET_REPLIES', event);
 }).listen('.QweetReqweetsUpdated', function (event) {
   if (event.user_id == User.id) {
     store.dispatch('reqweets/syncReqweet', event.id);
@@ -67316,15 +67318,30 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return qweet;
       });
     },
-    REMOVE_QWEET: function REMOVE_QWEET(state, _ref2) {
-      var id = _ref2.id;
+    SET_REPLIES: function SET_REPLIES(state, _ref2) {
+      var id = _ref2.id,
+          count = _ref2.count;
+      state.qweets = state.qweets.map(function (qweet) {
+        if (qweet.id === id) {
+          qweet.replies_count = count;
+        }
+
+        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(qweet.original_qweet, 'id') === id) {
+          qweet.original_qweet.replies_count = count;
+        }
+
+        return qweet;
+      });
+    },
+    REMOVE_QWEET: function REMOVE_QWEET(state, _ref3) {
+      var id = _ref3.id;
       state.qweets = state.qweets.filter(function (qweet) {
         return qweet.id !== id;
       });
     },
-    SET_LIKES: function SET_LIKES(state, _ref3) {
-      var id = _ref3.id,
-          count = _ref3.count;
+    SET_LIKES: function SET_LIKES(state, _ref4) {
+      var id = _ref4.id,
+          count = _ref4.count;
       state.qweets = state.qweets.map(function (qweet) {
         if (qweet.id === id) {
           qweet.likes_count = count;
@@ -67339,14 +67356,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   actions: {
-    getQweets: function getQweets(_ref4, url) {
+    getQweets: function getQweets(_ref5, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var commit, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref4.commit;
+                commit = _ref5.commit;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
 
@@ -67369,14 +67386,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }, _callee);
       }))();
     },
-    quoteQweet: function quoteQweet(_, _ref5) {
+    quoteQweet: function quoteQweet(_, _ref6) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var qweet, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                qweet = _ref5.qweet, data = _ref5.data;
+                qweet = _ref6.qweet, data = _ref6.data;
                 _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/quotes"), data);
 
@@ -67388,14 +67405,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }, _callee2);
       }))();
     },
-    replyToQweet: function replyToQweet(_, _ref6) {
+    replyToQweet: function replyToQweet(_, _ref7) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var qweet, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                qweet = _ref6.qweet, data = _ref6.data;
+                qweet = _ref7.qweet, data = _ref7.data;
                 _context3.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/replies"), data);
 

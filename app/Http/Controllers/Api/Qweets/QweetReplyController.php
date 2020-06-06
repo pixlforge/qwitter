@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api\Qweets;
 
 use App\Qweet;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\QweetMedia;
 use App\Qweets\QweetType;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Events\Qweets\QweetRepliesUpdated;
 
 class QweetReplyController extends Controller
 {
@@ -15,7 +16,7 @@ class QweetReplyController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum']);
     }
     
     public function store(Qweet $qweet, Request $request): void
@@ -28,5 +29,7 @@ class QweetReplyController extends Controller
         foreach ($request->media as $id) {
             $reply->media()->save(QweetMedia::find($id));
         }
+
+        QweetRepliesUpdated::broadcast($qweet);
     }
 }
