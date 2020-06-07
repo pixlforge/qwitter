@@ -6,6 +6,7 @@ use App\Qweet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Events\Qweets\QweetLikesUpdated;
+use App\Notifications\Qweets\QweetLiked;
 
 class QweetLikeController extends Controller
 {
@@ -31,6 +32,10 @@ class QweetLikeController extends Controller
         $request->user()->likes()->create([
             'qweet_id' => $qweet->id
         ]);
+
+        // if ($request->user()->id !== $qweet->user_id) {
+            $qweet->user->notify(new QweetLiked($request->user(), $qweet));
+        // }
 
         QweetLikesUpdated::broadcast($request->user(), $qweet);
     }
