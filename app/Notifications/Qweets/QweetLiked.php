@@ -2,13 +2,14 @@
 
 namespace App\Notifications\Qweets;
 
-use App\Http\Resources\QweetResource;
-use App\Http\Resources\UserResource;
 use App\User;
 use App\Qweet;
 use Illuminate\Bus\Queueable;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\QweetResource;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\DatabaseNotificationChannel;
 
 class QweetLiked extends Notification implements ShouldQueue
 {
@@ -48,7 +49,9 @@ class QweetLiked extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            DatabaseNotificationChannel::class,
+        ];
     }
 
     /**
