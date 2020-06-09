@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 class NotificationController extends Controller
 {
     /**
-     * Undocumented function
+     * Show a list of all notifications.
      *
      * @return View
      */

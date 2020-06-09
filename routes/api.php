@@ -8,12 +8,18 @@ use App\Http\Controllers\Api\Qweets\QweetQuoteController;
 use App\Http\Controllers\Api\Qweets\QweetReplyController;
 use App\Http\Controllers\Api\Timeline\TimelineController;
 use App\Http\Controllers\Api\Qweets\QweetReqweetController;
+use App\Http\Controllers\Api\Notifications\NotificationController;
 
 /**
  * Media
  */
 Route::post('/media', [MediaController::class, 'store']);
 Route::get('/media/types', [MediaTypesController::class, 'index'])->name('media.types.index');
+
+/**
+ * Notifications
+ */
+Route::get('/notifications', [NotificationController::class, 'index']);
 
 /**
  * Qweets
