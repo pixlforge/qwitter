@@ -1,6 +1,9 @@
 <template>
-  <div class="hover:bg-blue-800">
-    {{ notification }}
+  <div class="w-full flex border-b border-gray-800">
+    <component
+      :is="`AppNotification${notification.type}`"
+      :notification="notification"
+    />
   </div>
 </template>
 
