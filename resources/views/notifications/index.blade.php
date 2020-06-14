@@ -15,7 +15,7 @@
       </aside>
 
       <main class="w-3/4 border-r border-l border-gray-800">
-        Notifications
+        <app-notifications></app-notifications>
       </main>
 
     </div>
