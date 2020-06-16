@@ -33,9 +33,9 @@ class QweetLikeController extends Controller
             'qweet_id' => $qweet->id
         ]);
 
-        // if ($request->user()->id !== $qweet->user_id) {
+        if ($request->user()->id !== $qweet->user_id) {
             $qweet->user->notify(new QweetLiked($request->user(), $qweet));
-        // }
+        }
 
         QweetLikesUpdated::broadcast($request->user(), $qweet);
     }

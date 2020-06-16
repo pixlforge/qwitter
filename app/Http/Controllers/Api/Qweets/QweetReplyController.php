@@ -8,6 +8,7 @@ use App\Qweets\QweetType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Events\Qweets\QweetRepliesUpdated;
+use App\Notifications\Qweets\QweetRepliedTo;
 
 class QweetReplyController extends Controller
 {
@@ -19,7 +20,7 @@ class QweetReplyController extends Controller
         $this->middleware(['auth:sanctum']);
     }
     
-    public function store(Qweet $qweet, Request $request): void
+    public function store(Qweet $qweet, Request $request)
     {
         $reply = $request->user()->qweets()->create(array_merge($request->only('body'), [
             'type' => QweetType::QWEET,
@@ -28,6 +29,10 @@ class QweetReplyController extends Controller
 
         foreach ($request->media as $id) {
             $reply->media()->save(QweetMedia::find($id));
+        }
+
+        if ($request->user()->id !== $qweet->user_id) {
+            $qweet->user->notify(new QweetRepliedTo($request->user(), $reply));
         }
 
         QweetRepliesUpdated::broadcast($qweet);
