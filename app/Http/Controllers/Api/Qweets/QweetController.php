@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api\Qweets;
 
+use App\Qweet;
 use App\QweetMedia;
 use App\Qweets\QweetType;
-use App\Events\Qweets\QweetWasCreated;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Events\Qweets\QweetWasCreated;
+use App\Http\Resources\QweetCollection;
 use App\Http\Requests\Qweets\QweetStoreRequest;
 
 class QweetController extends Controller
@@ -16,6 +19,17 @@ class QweetController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->only('store');
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index(Request $request)
+    {
+        return new QweetCollection(Qweet::find(explode(',', $request->ids)));
     }
 
     /**

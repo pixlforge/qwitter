@@ -2902,6 +2902,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2912,10 +2919,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     notification: {
@@ -2923,11 +2927,16 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
-  computed: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    qweet: 'notifications/qweet'
+  }), {
     qweetContent: function qweetContent() {
       return this.notification.data.qweet.body;
+    },
+    resolvedQweet: function resolvedQweet() {
+      return this.qweet(this.notification.data.qweet.id);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -51056,23 +51065,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-4" }, [
-    _c(
-      "div",
-      { staticClass: "text-gray-300 mb-4" },
-      [
-        _c("app-qweet-username", {
-          attrs: { user: _vm.notification.data.user }
-        }),
-        _vm._v("\n    replied to your qweet\n  ")
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("p", { staticClass: "text-gray-600" }, [
-      _vm._v("\n    " + _vm._s(_vm.qweetContent) + "\n  ")
-    ])
-  ])
+  return _c(
+    "div",
+    { staticClass: "w-full p-4" },
+    [
+      _vm.resolvedQweet
+        ? _c("app-qweet", {
+            staticClass: "!border-0",
+            attrs: { qweet: _vm.resolvedQweet }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -67783,6 +67788,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _qweet_getters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./qweet/getters */ "./resources/js/store/qweet/getters.js");
+/* harmony import */ var _qweet_mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./qweet/mutations */ "./resources/js/store/qweet/mutations.js");
+/* harmony import */ var _qweet_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./qweet/actions */ "./resources/js/store/qweet/actions.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -67801,42 +67809,58 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    notifications: []
+    notifications: [],
+    qweets: []
   },
-  getters: {
+  getters: _objectSpread({}, _qweet_getters__WEBPACK_IMPORTED_MODULE_2__["default"], {
     notifications: function notifications(state) {
       return state.notifications;
+    },
+    qweetIdsFromNotifications: function qweetIdsFromNotifications(state) {
+      return state.notifications.map(function (notification) {
+        return notification.data.qweet.id;
+      });
     }
-  },
-  mutations: {
+  }),
+  mutations: _objectSpread({}, _qweet_mutations__WEBPACK_IMPORTED_MODULE_3__["default"], {
     SET_NOTIFICATIONS: function SET_NOTIFICATIONS(state, data) {
       var _state$notifications;
 
       (_state$notifications = state.notifications).push.apply(_state$notifications, _toConsumableArray(data));
     }
-  },
-  actions: {
+  }),
+  actions: _objectSpread({}, _qweet_actions__WEBPACK_IMPORTED_MODULE_4__["default"], {
     getNotifications: function getNotifications(_ref, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var commit, notifications;
+        var commit, dispatch, getters, notifications;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref.commit;
+                commit = _ref.commit, dispatch = _ref.dispatch, getters = _ref.getters;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
 
               case 3:
                 notifications = _context.sent;
                 commit('SET_NOTIFICATIONS', notifications.data.data);
+                dispatch('getQweets', "/api/qweets?ids=".concat(getters.qweetIdsFromNotifications.join(',')));
                 return _context.abrupt("return", notifications);
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -67844,6 +67868,214 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }, _callee);
       }))();
     }
+  })
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/qweet/actions.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/qweet/actions.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getQweets: function getQweets(_ref, url) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var commit, res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
+
+            case 3:
+              res = _context.sent;
+              commit('SET_QWEETS', res.data.data);
+              commit('likes/SET_LIKES', res.data.meta.likes, {
+                root: true
+              });
+              commit('reqweets/SET_REQWEETS', res.data.meta.reqweets, {
+                root: true
+              });
+              return _context.abrupt("return", res);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  quoteQweet: function quoteQweet(_, _ref2) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var qweet, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              qweet = _ref2.qweet, data = _ref2.data;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/quotes"), data);
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  replyToQweet: function replyToQweet(_, _ref3) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var qweet, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              qweet = _ref3.qweet, data = _ref3.data;
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/replies"), data);
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/qweet/getters.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/qweet/getters.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  qweets: function qweets(state) {
+    return state.qweets.sort(function (a, b) {
+      return b.created_at - a.created_at;
+    });
+  },
+  qweet: function qweet(state) {
+    return function (id) {
+      return state.qweets.find(function (qweet) {
+        return qweet.id === id;
+      });
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/qweet/mutations.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/qweet/mutations.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  SET_QWEETS: function SET_QWEETS(state, qweets) {
+    var _state$qweets;
+
+    (_state$qweets = state.qweets).push.apply(_state$qweets, _toConsumableArray(qweets.filter(function (qweet) {
+      return !state.qweets.map(function (q) {
+        return q.id;
+      }).includes(qweet.id);
+    })));
+  },
+  SET_REQWEETS: function SET_REQWEETS(state, _ref) {
+    var id = _ref.id,
+        count = _ref.count;
+    state.qweets = state.qweets.map(function (qweet) {
+      if (qweet.id === id) {
+        qweet.reqweets_count = count;
+      }
+
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(qweet.original_qweet, 'id') === id) {
+        qweet.original_qweet.reqweets_count = count;
+      }
+
+      return qweet;
+    });
+  },
+  SET_REPLIES: function SET_REPLIES(state, _ref2) {
+    var id = _ref2.id,
+        count = _ref2.count;
+    state.qweets = state.qweets.map(function (qweet) {
+      if (qweet.id === id) {
+        qweet.replies_count = count;
+      }
+
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(qweet.original_qweet, 'id') === id) {
+        qweet.original_qweet.replies_count = count;
+      }
+
+      return qweet;
+    });
+  },
+  REMOVE_QWEET: function REMOVE_QWEET(state, _ref3) {
+    var id = _ref3.id;
+    state.qweets = state.qweets.filter(function (qweet) {
+      return qweet.id !== id;
+    });
+  },
+  SET_LIKES: function SET_LIKES(state, _ref4) {
+    var id = _ref4.id,
+        count = _ref4.count;
+    state.qweets = state.qweets.map(function (qweet) {
+      if (qweet.id === id) {
+        qweet.likes_count = count;
+      }
+
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(qweet.original_qweet, 'id') === id) {
+        qweet.original_qweet.likes_count = count;
+      }
+
+      return qweet;
+    });
   }
 });
 
@@ -67967,29 +68199,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+/* harmony import */ var _qweet_getters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./qweet/getters */ "./resources/js/store/qweet/getters.js");
+/* harmony import */ var _qweet_mutations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./qweet/mutations */ "./resources/js/store/qweet/mutations.js");
+/* harmony import */ var _qweet_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./qweet/actions */ "./resources/js/store/qweet/actions.js");
 
 
 
@@ -67998,145 +68210,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   state: {
     qweets: []
   },
-  getters: {
-    qweets: function qweets(state) {
-      return state.qweets.sort(function (a, b) {
-        return b.created_at - a.created_at;
-      });
-    }
-  },
-  mutations: {
-    SET_QWEETS: function SET_QWEETS(state, qweets) {
-      var _state$qweets;
-
-      (_state$qweets = state.qweets).push.apply(_state$qweets, _toConsumableArray(qweets.filter(function (qweet) {
-        return !state.qweets.map(function (q) {
-          return q.id;
-        }).includes(qweet.id);
-      })));
-    },
-    SET_REQWEETS: function SET_REQWEETS(state, _ref) {
-      var id = _ref.id,
-          count = _ref.count;
-      state.qweets = state.qweets.map(function (qweet) {
-        if (qweet.id === id) {
-          qweet.reqweets_count = count;
-        }
-
-        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(qweet.original_qweet, 'id') === id) {
-          qweet.original_qweet.reqweets_count = count;
-        }
-
-        return qweet;
-      });
-    },
-    SET_REPLIES: function SET_REPLIES(state, _ref2) {
-      var id = _ref2.id,
-          count = _ref2.count;
-      state.qweets = state.qweets.map(function (qweet) {
-        if (qweet.id === id) {
-          qweet.replies_count = count;
-        }
-
-        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(qweet.original_qweet, 'id') === id) {
-          qweet.original_qweet.replies_count = count;
-        }
-
-        return qweet;
-      });
-    },
-    REMOVE_QWEET: function REMOVE_QWEET(state, _ref3) {
-      var id = _ref3.id;
-      state.qweets = state.qweets.filter(function (qweet) {
-        return qweet.id !== id;
-      });
-    },
-    SET_LIKES: function SET_LIKES(state, _ref4) {
-      var id = _ref4.id,
-          count = _ref4.count;
-      state.qweets = state.qweets.map(function (qweet) {
-        if (qweet.id === id) {
-          qweet.likes_count = count;
-        }
-
-        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(qweet.original_qweet, 'id') === id) {
-          qweet.original_qweet.likes_count = count;
-        }
-
-        return qweet;
-      });
-    }
-  },
-  actions: {
-    getQweets: function getQweets(_ref5, url) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var commit, res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                commit = _ref5.commit;
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url);
-
-              case 3:
-                res = _context.sent;
-                commit('SET_QWEETS', res.data.data);
-                commit('likes/SET_LIKES', res.data.meta.likes, {
-                  root: true
-                });
-                commit('reqweets/SET_REQWEETS', res.data.meta.reqweets, {
-                  root: true
-                });
-                return _context.abrupt("return", res);
-
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    quoteQweet: function quoteQweet(_, _ref6) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var qweet, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                qweet = _ref6.qweet, data = _ref6.data;
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/quotes"), data);
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    replyToQweet: function replyToQweet(_, _ref7) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var qweet, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                qweet = _ref7.qweet, data = _ref7.data;
-                _context3.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/qweets/".concat(qweet.id, "/replies"), data);
-
-              case 3:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    }
-  }
+  getters: _qweet_getters__WEBPACK_IMPORTED_MODULE_0__["default"],
+  mutations: _qweet_mutations__WEBPACK_IMPORTED_MODULE_1__["default"],
+  actions: _qweet_actions__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),

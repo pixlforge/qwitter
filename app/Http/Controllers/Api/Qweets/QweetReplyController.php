@@ -20,6 +20,13 @@ class QweetReplyController extends Controller
         $this->middleware(['auth:sanctum']);
     }
     
+    /**
+     * Store a new qweet as a reply to another qweet.
+     *
+     * @param Qweet $qweet
+     * @param Request $request
+     * @return void
+     */
     public function store(Qweet $qweet, Request $request)
     {
         $reply = $request->user()->qweets()->create(array_merge($request->only('body'), [

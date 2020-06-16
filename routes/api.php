@@ -24,6 +24,7 @@ Route::get('/notifications', [NotificationController::class, 'index']);
 /**
  * Qweets
  */
+Route::get('/qweets', [QweetController::class, 'index'])->name('qweet.index');
 Route::post('/qweets', [QweetController::class, 'store'])->name('qweet.store');
 
 /**

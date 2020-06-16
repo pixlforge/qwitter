@@ -1,18 +1,16 @@
 <template>
-  <div class="p-4">
-    <div class="text-gray-300 mb-4">
-      <app-qweet-username :user="notification.data.user" />
-      replied to your qweet
-    </div>
-
-    <p class="text-gray-600">
-      {{ qweetContent }}
-    </p>
-
+  <div class="w-full p-4">
+    <app-qweet
+      v-if="resolvedQweet"
+      :qweet="resolvedQweet"
+      class="!border-0"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     notification: {
@@ -21,8 +19,14 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      qweet: 'notifications/qweet'
+    }),
     qweetContent () {
       return this.notification.data.qweet.body
+    },
+    resolvedQweet () {
+      return this.qweet(this.notification.data.qweet.id)
     }
   }
 }
