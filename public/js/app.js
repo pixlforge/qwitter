@@ -65463,14 +65463,17 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
   }
 
   store.commit('timeline/SET_LIKES', event);
+  store.commit('notifications/SET_LIKES', event);
 }).listen('.QweetRepliesUpdated', function (event) {
   store.commit('timeline/SET_REPLIES', event);
+  store.commit('notifications/SET_REPLIES', event);
 }).listen('.QweetReqweetsUpdated', function (event) {
   if (event.user_id == User.id) {
     store.dispatch('reqweets/syncReqweet', event.id);
   }
 
   store.commit('timeline/SET_REQWEETS', event);
+  store.commit('notifications/SET_REQWEETS', event);
 }).listen('.QweetWasDeleted', function (event) {
   store.commit('timeline/REMOVE_QWEET', event);
 });
