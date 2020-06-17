@@ -16,6 +16,22 @@ class Qweet extends Model
         'body', 'type', 'original_qweet_id', 'parent_id',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Qweet $qweet) {
+            preg_match_all(
+                '/(?!\s)#([A-Za-z]\w*)\b/',
+                $qweet->body,
+                $matches,
+                PREG_OFFSET_CAPTURE
+            );
+
+            dd($matches);
+        });
+    }
+
     /**
      * Scope query by top level parent qweets.
      *
