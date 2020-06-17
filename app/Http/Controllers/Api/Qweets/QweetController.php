@@ -29,7 +29,12 @@ class QweetController extends Controller
      */
     public function index(Request $request)
     {
-        return new QweetCollection(Qweet::find(explode(',', $request->ids)));
+        $qweets = Qweet::with([
+            'user', 'likes', 'reqweets', 'replies', 'media.baseMedia',
+            'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets', 'originalQweet.replies', 'originalQweet.media.baseMedia'
+        ])->find(explode(',', $request->ids));
+
+        return new QweetCollection($qweets);
     }
 
     /**
