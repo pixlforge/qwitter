@@ -96,4 +96,14 @@ class Qweet extends Model
     {
         return $this->hasMany(Qweet::class, 'parent_id');
     }
+
+    /**
+     * Entities relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function entities()
+    {
+        return $this->hasMany(Entity::class);
+    }
 }
