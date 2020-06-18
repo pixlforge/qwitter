@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Qweets\Entities\EntityExtractor;
+use Illuminate\Database\Eloquent\Builder;
 
 class Qweet extends Model
 {
@@ -21,14 +22,9 @@ class Qweet extends Model
         parent::boot();
 
         static::created(function (Qweet $qweet) {
-            preg_match_all(
-                '/(?!\s)#([A-Za-z]\w*)\b/',
-                $qweet->body,
-                $matches,
-                PREG_OFFSET_CAPTURE
+            $qweet->entities()->createMany(
+                (new EntityExtractor($qweet->body))->getHashtagEntities()
             );
-
-            dd($matches);
         });
     }
 
