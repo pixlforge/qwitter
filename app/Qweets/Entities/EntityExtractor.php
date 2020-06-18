@@ -12,17 +12,32 @@ class EntityExtractor
     protected $string;
 
     const HASHTAG_REGEX = '/(?!\s)#([A-Za-z]\w*)\b/';
+
+    const MENTION_REGEX = '/(?=[^\w!])@(\w+)\b/';
     
     public function __construct($string)
     {
         $this->string = $string;
     }
 
+    public function getAllEntities()
+    {
+        return array_merge($this->getHashtagEntities(), $this->getMentionEntities());
+    }     
+
     public function getHashtagEntities()
     {
         return $this->buildEntityCollection(
             $this->match(self::HASHTAG_REGEX),
             'hashtag' //TODO: Extract to a class
+        );
+    }
+
+    public function getMentionEntities()
+    {
+        return $this->buildEntityCollection(
+            $this->match(self::MENTION_REGEX),
+            'mention' //TODO: Extract to a class
         );
     }
 

@@ -23,7 +23,7 @@ class Qweet extends Model
 
         static::created(function (Qweet $qweet) {
             $qweet->entities()->createMany(
-                (new EntityExtractor($qweet->body))->getHashtagEntities()
+                (new EntityExtractor($qweet->body))->getAllEntities()
             );
         });
     }
