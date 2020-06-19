@@ -20,27 +20,48 @@ class EntityExtractor
         $this->string = $string;
     }
 
+    /**
+     * Get all entities in the qweet.
+     *
+     * @return array
+     */
     public function getAllEntities()
     {
         return array_merge($this->getHashtagEntities(), $this->getMentionEntities());
     }     
 
+    /**
+     * Get the hashtag type entities.
+     *
+     * @return array
+     */
     public function getHashtagEntities()
     {
         return $this->buildEntityCollection(
             $this->match(self::HASHTAG_REGEX),
-            'hashtag' //TODO: Extract to a class
+            EntityType::HASHTAG
         );
     }
 
+    /**
+     * Get the mention type entities.
+     *
+     * @return array
+     */
     public function getMentionEntities()
     {
         return $this->buildEntityCollection(
             $this->match(self::MENTION_REGEX),
-            'mention' //TODO: Extract to a class
+            EntityType::MENTION
         );
     }
 
+    /**
+     * March a string with the provided regex pattern.
+     *
+     * @param string $pattern
+     * @return array
+     */
     protected function match($pattern)
     {
         preg_match_all($pattern, $this->string, $matches, PREG_OFFSET_CAPTURE);
@@ -48,6 +69,13 @@ class EntityExtractor
         return $matches;
     }
 
+    /**
+     * Build the array for database storage for an entity.
+     *
+     * @param array $entities
+     * @param string $type
+     * @return array
+     */
     protected function buildEntityCollection($entities, $type)
     {
         return array_map(function ($entity, $index) use ($entities, $type) {
