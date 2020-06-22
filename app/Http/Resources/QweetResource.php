@@ -25,6 +25,7 @@ class QweetResource extends JsonResource
             'media' => new MediaCollection($this->media),
             'replies_count' => $this->replies->count(),
             'replies' => new QweetCollection($this->replies),
+            'entities' => new EntityCollection($this->entities),
             'created_at' => $this->created_at->timestamp
         ];
     }
