@@ -15,7 +15,7 @@
       <app-qweet-username :user="qweet.user"></app-qweet-username>
 
       <!-- Body -->
-      <p class="text-gray-300 whitespace-pre-wrap">{{ qweet.body }}</p>
+      <app-qweet-body :qweet="qweet" />
 
       <!-- Images -->
       <div
