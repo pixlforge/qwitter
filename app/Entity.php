@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Qweets\Entities\EntityDatabaseCollection;
 
 class Entity extends Model
 {
@@ -12,4 +13,9 @@ class Entity extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function newCollection(array $models = [])
+    {
+        return new EntityDatabaseCollection($models);
+    }
 }

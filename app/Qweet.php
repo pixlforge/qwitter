@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Qweets\Entities\EntityExtractor;
+use App\Qweets\Entities\EntityType;
 use Illuminate\Database\Eloquent\Builder;
 
 class Qweet extends Model
@@ -117,5 +118,16 @@ class Qweet extends Model
     public function entities()
     {
         return $this->hasMany(Entity::class);
+    }
+
+    /**
+     * Mentions type entities relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function mentions()
+    {
+        return $this->hasMany(Entity::class)
+            ->whereType(EntityType::MENTION);
     }
 }

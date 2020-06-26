@@ -54,6 +54,8 @@ class QweetController extends Controller
             $qweet->media()->save(QweetMedia::find($id));
         }
 
+        dd($qweet->mentions->users());
+
         QweetWasCreated::broadcast($qweet);
     }
 }
