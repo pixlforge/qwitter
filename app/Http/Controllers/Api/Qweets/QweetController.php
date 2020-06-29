@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Events\Qweets\QweetWasCreated;
 use App\Http\Resources\QweetCollection;
+use App\Notifications\Qweets\QweetMentionedIn;
 use App\Http\Requests\Qweets\QweetStoreRequest;
 
 class QweetController extends Controller
@@ -54,7 +55,11 @@ class QweetController extends Controller
             $qweet->media()->save(QweetMedia::find($id));
         }
 
-        dd($qweet->mentions->users());
+        foreach ($qweet->mentions->users() as $user) {
+            if ($request->user()->id !== $user->id) {
+                $user->notify(new QweetMentionedIn($request->user(), $qweet));
+            }
+        }
 
         QweetWasCreated::broadcast($qweet);
     }
