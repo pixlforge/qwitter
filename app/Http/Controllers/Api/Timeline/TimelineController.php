@@ -29,7 +29,7 @@ class TimelineController extends Controller
                 ->qweetsFromFollowing()
                 ->parent()
                 ->with([
-                    'user', 'likes', 'reqweets', 'replies', 'media.baseMedia',
+                    'user', 'likes', 'reqweets', 'replies', 'media.baseMedia', 'entities',
                     'originalQweet.user', 'originalQweet.likes', 'originalQweet.reqweets', 'originalQweet.replies', 'originalQweet.media.baseMedia'
                 ])
                 ->latest()
