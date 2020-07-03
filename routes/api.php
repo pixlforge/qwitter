@@ -37,6 +37,7 @@ Route::delete('/qweets/{qweet}/likes', [QweetLikeController::class, 'destroy'])-
 /**
  * Replies
  */
+Route::get('/qweets/{qweet}/replies/', [QweetReplyController::class, 'show'])->name('qweet.reply.show');
 Route::post('/qweets/{qweet}/replies', [QweetReplyController::class, 'store'])->name('qweet.reply.store');
 
 /**

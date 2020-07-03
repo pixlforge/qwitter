@@ -11,7 +11,6 @@ use App\Events\Qweets\QweetWasCreated;
 use App\Http\Resources\QweetCollection;
 use App\Notifications\Qweets\QweetMentionedIn;
 use App\Http\Requests\Qweets\QweetStoreRequest;
-use App\Http\Resources\QweetResource;
 
 class QweetController extends Controller
 {

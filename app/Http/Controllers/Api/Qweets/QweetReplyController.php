@@ -7,6 +7,7 @@ use App\QweetMedia;
 use App\Qweets\QweetType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\QweetCollection;
 use App\Events\Qweets\QweetRepliesUpdated;
 use App\Notifications\Qweets\QweetRepliedTo;
 
@@ -17,7 +18,18 @@ class QweetReplyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->only('store');
+    }
+
+    /**
+     * Show a specific reply.
+     *
+     * @param Qweet $qweet
+     * @return QweetCollection
+     */
+    public function show(Qweet $qweet)
+    {
+        return new QweetCollection($qweet->replies);
     }
     
     /**
