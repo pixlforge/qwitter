@@ -50,6 +50,29 @@ class Qweet extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function parents()
+    {
+        $base = $this;
+        $parents = [];
+
+        while ($base->parentQweet) {
+            $parents[] = $base->parentQweet;
+            $base = $base->parentQweet;
+        }
+
+        return collect($parents);
+    }
+
+    /**
+     * Parent qweet relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parentQweet()
+    {
+        return $this->belongsTo(Qweet::class, 'parent_id');
+    }
+
     /**
      * Original qweet relationship.
      *

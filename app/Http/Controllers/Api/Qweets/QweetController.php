@@ -11,6 +11,7 @@ use App\Events\Qweets\QweetWasCreated;
 use App\Http\Resources\QweetCollection;
 use App\Notifications\Qweets\QweetMentionedIn;
 use App\Http\Requests\Qweets\QweetStoreRequest;
+use App\Http\Resources\QweetResource;
 
 class QweetController extends Controller
 {
@@ -36,6 +37,17 @@ class QweetController extends Controller
         ])->find(explode(',', $request->ids));
 
         return new QweetCollection($qweets);
+    }
+
+    /**
+     * Show a specific qweeet.
+     *
+     * @param Qweet $qweet
+     * @return QweetCollection
+     */
+    public function show(Qweet $qweet)
+    {
+        return new QweetCollection(collect([$qweet])->merge($qweet->parents()));
     }
 
     /**
