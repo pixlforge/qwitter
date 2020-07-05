@@ -1,11 +1,26 @@
 <template>
   <div>
-    Conversation
+
+    <div>
+      parents
+    </div>
+
+    <div class="border-t-8 border-b-8 border-gray-800 text-lg">
+      <app-qweet
+        v-if="qweet(id)"
+        :qweet="qweet(id)"
+      />
+    </div>
+
+    <div>
+      replies
+    </div>
+    
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -13,6 +28,11 @@ export default {
       type: String,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      qweet: 'conversation/qweet'
+    })
   },
   mounted () {
     this.getQweets(`/api/qweets/${this.id}`);

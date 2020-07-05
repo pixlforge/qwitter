@@ -2611,6 +2611,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2619,6 +2634,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    qweet: 'conversation/qweet'
+  })),
   mounted: function mounted() {
     this.getQweets("/api/qweets/".concat(this.id));
   },
@@ -50923,7 +50941,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n  Conversation\n")])
+  return _c("div", [
+    _c("div", [_vm._v("\n    parents\n  ")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "border-t-8 border-b-8 border-gray-800 text-lg" },
+      [
+        _vm.qweet(_vm.id)
+          ? _c("app-qweet", { attrs: { qweet: _vm.qweet(_vm.id) } })
+          : _vm._e()
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", [_vm._v("\n    replies\n  ")])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68354,14 +68387,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _qweet_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./qweet/actions */ "./resources/js/store/qweet/actions.js");
+/* harmony import */ var _qweet_mutations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./qweet/mutations */ "./resources/js/store/qweet/mutations.js");
+/* harmony import */ var _qweet_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./qweet/actions */ "./resources/js/store/qweet/actions.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
     qweets: []
   },
-  actions: _qweet_actions__WEBPACK_IMPORTED_MODULE_0__["default"]
+  getters: {
+    qweet: function qweet(state) {
+      return function (id) {
+        return state.qweets.find(function (qweet) {
+          return qweet.id == id;
+        });
+      };
+    }
+  },
+  mutations: _qweet_mutations__WEBPACK_IMPORTED_MODULE_0__["default"],
+  actions: _qweet_actions__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 
 /***/ }),
@@ -68935,8 +68980,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/celien.boillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/celien.boillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/celienboillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/celienboillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
