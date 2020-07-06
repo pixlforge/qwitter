@@ -50974,7 +50974,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "border-b-8 border-gray-800 text-2xl",
+        staticClass: "border-b-8 border-gray-800 text-xl",
         class: {
           "border-t-8": _vm.parents(_vm.id).length
         }
@@ -51091,7 +51091,7 @@ var render = function() {
   return _c(
     "a",
     {
-      staticClass: "block hover:bg-gray-600 text-gray-300 px-4 py-3",
+      staticClass: "block text-base hover:bg-gray-600 text-gray-300 px-4 py-3",
       attrs: { href: "#" },
       on: {
         click: function($event) {
@@ -65866,9 +65866,11 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
 
   store.commit('timeline/SET_LIKES', event);
   store.commit('notifications/SET_LIKES', event);
+  store.commit('conversation/SET_LIKES', event);
 }).listen('.QweetRepliesUpdated', function (event) {
   store.commit('timeline/SET_REPLIES', event);
   store.commit('notifications/SET_REPLIES', event);
+  store.commit('conversation/SET_REPLIES', event);
 }).listen('.QweetReqweetsUpdated', function (event) {
   if (event.user_id == User.id) {
     store.dispatch('reqweets/syncReqweet', event.id);
@@ -65876,6 +65878,7 @@ window.Echo.channel('qweets').listen('.QweetLikesUpdated', function (event) {
 
   store.commit('timeline/SET_REQWEETS', event);
   store.commit('notifications/SET_REQWEETS', event);
+  store.commit('conversation/SET_REQWEETS', event);
 }).listen('.QweetWasDeleted', function (event) {
   store.commit('timeline/REMOVE_QWEET', event);
 });

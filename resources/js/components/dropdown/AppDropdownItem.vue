@@ -2,7 +2,7 @@
   <a
     @click.prevent="handleClick"
     href="#"
-    class="block hover:bg-gray-600 text-gray-300 px-4 py-3"
+    class="block text-base hover:bg-gray-600 text-gray-300 px-4 py-3"
   >
     <slot/>
   </a>

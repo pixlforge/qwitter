@@ -77,10 +77,12 @@ window.Echo.channel('qweets')
 
         store.commit('timeline/SET_LIKES', event)
         store.commit('notifications/SET_LIKES', event)
+        store.commit('conversation/SET_LIKES', event)
     })
     .listen('.QweetRepliesUpdated', (event) => {
         store.commit('timeline/SET_REPLIES', event)
         store.commit('notifications/SET_REPLIES', event)
+        store.commit('conversation/SET_REPLIES', event)
     })
     .listen('.QweetReqweetsUpdated', (event) => {
         if (event.user_id == User.id) {
@@ -89,6 +91,7 @@ window.Echo.channel('qweets')
 
         store.commit('timeline/SET_REQWEETS', event)
         store.commit('notifications/SET_REQWEETS', event)
+        store.commit('conversation/SET_REQWEETS', event)
     })
     .listen('.QweetWasDeleted', (event) => {
         store.commit('timeline/REMOVE_QWEET', event)

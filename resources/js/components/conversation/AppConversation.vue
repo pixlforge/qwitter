@@ -15,7 +15,7 @@
       :class="{
         'border-t-8': parents(id).length
       }"
-      class="border-b-8 border-gray-800 text-2xl"
+      class="border-b-8 border-gray-800 text-xl"
     >
       <app-qweet
         v-if="qweet(id)"
