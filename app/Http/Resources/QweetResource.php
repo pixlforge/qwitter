@@ -26,6 +26,7 @@ class QweetResource extends JsonResource
             'reqweets_count' => $this->reqweets->count(),
             'media' => new MediaCollection($this->media),
             'replies_count' => $this->replies->count(),
+            'replying_to' => optional(optional($this->parentQweet)->user)->username,
             'replies' => new QweetCollection($this->replies),
             'entities' => new EntityCollection($this->entities),
             'created_at' => $this->created_at->timestamp

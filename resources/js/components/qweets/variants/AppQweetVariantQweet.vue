@@ -14,6 +14,13 @@
       <!-- Handle & username -->
       <app-qweet-username :user="qweet.user"></app-qweet-username>
 
+      <div
+        v-if="qweet.replying_to"
+        class="text-sm text-gray-600 mb-2"
+      >
+        Replying to <a href="#">@{{ qweet.replying_to }}</a>
+      </div>
+
       <!-- Body -->
       <app-qweet-body :qweet="qweet" />
 
