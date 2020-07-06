@@ -18,6 +18,8 @@ class QweetResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'original_qweet' => QweetResource::make($this->originalQweet),
+            'parent_id' => $this->parent_id,
+            'parent_ids' => $this->parents()->pluck('id'),
             'body' => $this->body,
             'user' => UserResource::make($this->user),
             'likes_count' => $this->likes->count(),

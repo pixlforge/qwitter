@@ -2626,6 +2626,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2635,10 +2651,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    qweet: 'conversation/qweet'
+    qweet: 'conversation/qweet',
+    parents: 'conversation/parents',
+    replies: 'conversation/replies'
   })),
   mounted: function mounted() {
     this.getQweets("/api/qweets/".concat(this.id));
+    this.getQweets("/api/qweets/".concat(this.id, "/replies"));
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     getQweets: 'conversation/getQweets'
@@ -50942,11 +50961,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", [_vm._v("\n    parents\n  ")]),
+    _vm.qweet(_vm.id)
+      ? _c(
+          "div",
+          _vm._l(_vm.parents(_vm.id), function(q) {
+            return _c("app-qweet", { key: q.id, attrs: { qweet: q } })
+          }),
+          1
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "border-t-8 border-b-8 border-gray-800 text-lg" },
+      {
+        staticClass: "border-b-8 border-gray-800 text-2xl",
+        class: {
+          "border-t-8": _vm.parents(_vm.id).length
+        }
+      },
       [
         _vm.qweet(_vm.id)
           ? _c("app-qweet", { attrs: { qweet: _vm.qweet(_vm.id) } })
@@ -50955,7 +50987,13 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", [_vm._v("\n    replies\n  ")])
+    _c(
+      "div",
+      _vm._l(_vm.replies(_vm.id), function(q) {
+        return _c("app-qweet", { key: q.id, attrs: { qweet: q } })
+      }),
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -68403,6 +68441,24 @@ __webpack_require__.r(__webpack_exports__);
           return qweet.id == id;
         });
       };
+    },
+    parents: function parents(state) {
+      return function (id) {
+        return state.qweets.filter(function (qweet) {
+          return qweet.id != id && !qweet.parent_ids.includes(parseInt(id));
+        }).sort(function (a, b) {
+          return a.created_at - b.created_at;
+        });
+      };
+    },
+    replies: function replies(state) {
+      return function (id) {
+        return state.qweets.filter(function (qweet) {
+          return qweet.parent_id == id;
+        }).sort(function (a, b) {
+          return a.created_at - b.created_at;
+        });
+      };
     }
   },
   mutations: _qweet_mutations__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -68980,8 +69036,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/celienboillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/celienboillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/celien.boillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/celien.boillat/Webdev/Projects/Tutorials/Laravel/qwitter/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

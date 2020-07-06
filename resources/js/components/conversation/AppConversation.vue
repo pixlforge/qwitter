@@ -1,19 +1,35 @@
 <template>
   <div>
 
-    <div>
-      parents
+    <!-- Parent qweets -->
+    <div v-if="qweet(id)">
+      <app-qweet
+        v-for="q in parents(id)"
+        :key="q.id"
+        :qweet="q"
+      />
     </div>
 
-    <div class="border-t-8 border-b-8 border-gray-800 text-lg">
+    <!-- Qweet -->
+    <div
+      :class="{
+        'border-t-8': parents(id).length
+      }"
+      class="border-b-8 border-gray-800 text-2xl"
+    >
       <app-qweet
         v-if="qweet(id)"
         :qweet="qweet(id)"
       />
     </div>
 
+    <!-- Replies -->
     <div>
-      replies
+      <app-qweet
+        v-for="q in replies(id)"
+        :key="q.id"
+        :qweet="q"
+      />
     </div>
     
   </div>
@@ -31,11 +47,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      qweet: 'conversation/qweet'
+      qweet: 'conversation/qweet',
+      parents: 'conversation/parents',
+      replies: 'conversation/replies'
     })
   },
   mounted () {
     this.getQweets(`/api/qweets/${this.id}`);
+    this.getQweets(`/api/qweets/${this.id}/replies`);
   },
   methods: {
     ...mapActions({
